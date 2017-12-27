@@ -1,0 +1,17 @@
+<div class="product-item">
+  <div class="product">
+    <div class="product_image">
+      <img src="{{product.ProductImageUrl[0]}}" alt="">
+    </div>
+    <div class="favorite favorite_left"></div>
+    <div *ngIf="product.Promotion > 0" class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+      <span>-{{product.Promotion}}%</span>
+    </div>
+    <div class="product_info">
+      <h6 class="product_name"><a href="single.html">{{product.Name}}</a></h6>
+      <div class="product_price" *ngIf="product.Promotion > 0">{{product.Price * product.Promotion / 100}}<span>{{product.Price}}</span></div>
+      <div class="product_price" *ngIf="product.Promotion === 0">{{product.Price}}</div>
+    </div>
+  </div>
+  <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+</div>
