@@ -1,11 +1,14 @@
 export class Product {
-  Id: string;
-  Name: string;
-  Price: number;
-  ManufactureName: string;
-  ManufactureYear: number;
-  ProductImageUrl: string[];
-  Type: number;
-  ProductSpecificType: number;
-  Promotion: number;
+  id: string;
+  name: string;
+  price: number;
+  manufacture: {
+    id: string
+  };
+  manufacutreYear: number;
+  productImageUrls: string[];
+  type: number;
+  specificType: number;
+  promotionRate: number;
+  quantity?: number;
 }

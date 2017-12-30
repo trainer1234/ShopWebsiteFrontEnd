@@ -1,3 +1,27 @@
-<p>
-  cart works!
-</p>
+<div class="page-content container">
+  <h3 style="margin-bottom: 20px;">Giỏ hàng của bạn</h3>
+  <div class="row">
+    <div class="col-lg-8">
+      <div *ngFor="let item of cartItems" class="box">
+        <i class="fa fa-times remove-icon" aria-hidden="true"></i>
+        <div style="display: flex;">
+          <div>
+            <img class="item-avatar" src="{{item.productImageUrls[0]}}">
+          </div>
+          <div>
+            <h4><b>{{item.name}}</b></h4>
+            <p><b style="margin-right: 10px">Đơn giá: </b>{{item.price | number}} VNĐ</p>
+            <input [(ngModel)]="item.quantity" class="form-control" type="number" value="1" min="1" max="10" (ngModelChange)="onItemQuantityChange($event)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="box">
+        <p><b style="margin-right: 10px">Số sản phẩm: </b>{{itemsQuantity}}</p>
+        <p><b style="margin-right: 10px">Thành tiền: </b> {{totalPrice | number}} VNĐ</p>
+      </div>
+      <button class="btn btn-block btn-success">Đặt hàng</button>
+    </div>
+  </div>
+</div>

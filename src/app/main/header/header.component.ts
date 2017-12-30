@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {EmitterService} from '../../shared/services/emitter.service';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  chosenProductNum = 0;
 
-  constructor() { }
+  cartEmitter = EmitterService.get('cart');
+
+  constructor() {
+    this.cartEmitter.subscribe(
+      msg => {
+        if (msg === 'add') {
+          this.chosenProductNum++;
+        } else {
+          this.chosenProductNum--;
+        }
+      }
+    );
+  }
 
   ngOnInit() {
   }

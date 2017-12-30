@@ -4,3 +4,8 @@
   display: inline-block;
   width: 19%;
 }
+
+.page-content{
+  padding: 30px 0;
+  min-height: 600px;
+}
