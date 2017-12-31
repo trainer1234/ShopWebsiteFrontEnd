@@ -1,10 +1,10 @@
+import {Manufacture} from './manufacture';
+
 export class Product {
   id: string;
   name: string;
   price: number;
-  manufacture: {
-    id: string
-  };
+  manufacture: Manufacture;
   manufacutreYear: number;
   productImageUrls: string[];
   type: number;

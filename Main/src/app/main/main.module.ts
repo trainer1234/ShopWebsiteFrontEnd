@@ -15,6 +15,9 @@ import { ProductComponent } from './product/product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { FilterComponent } from './filter/filter.component';
 import {FormsModule} from '@angular/forms';
+import {ProductService} from '../shared/services/product.service';
+import {AuthService} from '../shared/services/auth.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -22,6 +25,11 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
     RouterModule,
     MainRoutingModule,
+    HttpClientModule
+  ],
+  providers: [
+    AuthService,
+    ProductService
   ],
   declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, ContactComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent]
 })

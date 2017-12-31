@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Product} from '../../shared/models/product';
+import {ProductService} from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -7,105 +8,20 @@ import {Product} from '../../shared/models/product';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  @Input() type: string;
 
   products: Product[] = [];
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    this.products = [
-      {
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
+    this.productService.getAllProductsByType(this.type, 5).subscribe(
+      data => {
+        this.products = data['content'];
       },
-      {
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },{
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },{
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },{
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },{
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },{
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },{
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },{
-        id: '1',
-        name: 'iPhone X',
-        price: 1000000,
-        manufacture: {id: 'dasdsad'},
-        manufacutreYear: 2017,
-        productImageUrls: ['https://staticshop.o2.co.uk/product/images/iphone-x-space-grey-sku-header.png?cb=4097182fcd8a0d7b7e51b89d4a48f5bc'],
-        type: 1,
-        specificType: 1,
-        promotionRate: 0
-      },
-    ];
+      err => {
+        console.log(err);
+      }
+    );
   }
 
 }
