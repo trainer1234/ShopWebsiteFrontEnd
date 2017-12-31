@@ -13,6 +13,12 @@ import {UnprocessedOrderManagerComponent} from './order-manager/unprocessed-orde
 import {ProcessingOrderManagerComponent} from './order-manager/processing-order-manager/processing-order-manager.component';
 import { ProductPropertyManagerComponent } from './product-property-manager/product-property-manager.component';
 import { AccountManagerComponent } from './account-manager/account-manager.component';
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import {AuthGuard} from './auth.guard';
+import {HttpClientModule} from '@angular/common/http';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -24,15 +30,19 @@ import { AccountManagerComponent } from './account-manager/account-manager.compo
     WaitingProcessManagerComponent,
     FinishedOrderManagerComponent,
     ProductPropertyManagerComponent,
-    AccountManagerComponent
+    AccountManagerComponent,
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     RouterModule,
     AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [FormBuilder, AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

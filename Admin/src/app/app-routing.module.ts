@@ -8,50 +8,64 @@ import {ProcessingOrderManagerComponent} from './order-manager/processing-order-
 import {ProductPropertyManagerComponent} from './product-property-manager/product-property-manager.component';
 import {AccountManagerComponent} from './account-manager/account-manager.component';
 import {ProductManagerComponent} from './product-manager/product-manager.component';
+import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './auth.guard';
+import {AdminComponent} from './admin/admin.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
-  },
-  {
-    path: 'order-manager',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: '/order-manager/unprocessed',
-        pathMatch: 'full'
+        component: DashboardComponent,
       },
       {
-        path: 'unprocessed',
-        component: UnprocessedOrderManagerComponent
+        path: 'order-manager',
+        children: [
+          {
+            path: '',
+            redirectTo: '/order-manager/unprocessed',
+            pathMatch: 'full'
+          },
+          {
+            path: 'unprocessed',
+            component: UnprocessedOrderManagerComponent
+          },
+          {
+            path: 'wating-process',
+            component: WaitingProcessManagerComponent
+          },
+          {
+            path: 'processing',
+            component: ProcessingOrderManagerComponent
+          },
+          {
+            path: 'finished',
+            component: FinishedOrderManagerComponent
+          }
+        ]
       },
       {
-        path: 'wating-process',
-        component: WaitingProcessManagerComponent
+        path: 'product-manager',
+        component: ProductManagerComponent
       },
       {
-        path: 'processing',
-        component: ProcessingOrderManagerComponent
+        path: 'product-property-manager',
+        component: ProductPropertyManagerComponent
       },
       {
-        path: 'finished',
-        component: FinishedOrderManagerComponent
+        path: 'account-manager',
+        component: AccountManagerComponent
       }
     ]
   },
   {
-    path: 'product-manager',
-    component: ProductManagerComponent
+    path: 'login',
+    component: LoginComponent
   },
-  {
-    path: 'product-property-manager',
-    component: ProductPropertyManagerComponent
-  },
-  {
-    path: 'account-manager',
-    component: AccountManagerComponent
-  }
 ];
 
 @NgModule({
