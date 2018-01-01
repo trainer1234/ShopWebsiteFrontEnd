@@ -7,10 +7,13 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProcessingOrderManagerComponent} from './order-manager/processing-order-manager/processing-order-manager.component';
 import {ProductPropertyManagerComponent} from './product-property-manager/product-property-manager.component';
 import {AccountManagerComponent} from './account-manager/account-manager.component';
-import {ProductManagerComponent} from './product-manager/product-manager.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './auth.guard';
 import {AdminComponent} from './admin/admin.component';
+import {PhoneComponent} from './product-manager/phone/phone.component';
+import {TabletComponent} from './product-manager/tablet/tablet.component';
+import {AccessitoryComponent} from './product-manager/accessitory/accessitory.component';
+import {LaptopComponent} from './product-manager/laptop/laptop.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,32 @@ const routes: Routes = [
       {
         path: '',
         component: DashboardComponent,
+      },
+      {
+        path: 'product-manager',
+        children: [
+          {
+            path: '',
+            redirectTo: '/product-manager/phone',
+            pathMatch: 'full'
+          },
+          {
+            path: 'phone',
+            component: PhoneComponent
+          },
+          {
+            path: 'laptop',
+            component: LaptopComponent
+          },
+          {
+            path: 'tablet',
+            component: TabletComponent
+          },
+          {
+            path: 'accessitory',
+            component: AccessitoryComponent
+          }
+        ]
       },
       {
         path: 'order-manager',
@@ -47,10 +76,6 @@ const routes: Routes = [
             component: FinishedOrderManagerComponent
           }
         ]
-      },
-      {
-        path: 'product-manager',
-        component: ProductManagerComponent
       },
       {
         path: 'product-property-manager',

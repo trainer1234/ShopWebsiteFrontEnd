@@ -1,0 +1,103 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <i class="ace-icon fa fa-home home-icon"></i>
+      <a routerLink="">Home</a>
+    </li>
+    <li class="active">Quản lý hàng hóa</li>
+    <li class="active">Điện thoại</li>
+  </ul><!-- /.breadcrumb -->
+</div>
+
+<div class="page-content">
+  <button class="btn btn-success" (click)="addNew()">Add new</button>
+
+  <data-table headerTitle="Danh sách điện thoại"
+              [items]="currentPagePhones"
+              [itemCount]="phonesCount"
+              (reload)="reload($event)"
+
+              [limit]="pageLimit"
+              [expandableRows]="true"
+              [indexColumn]="false"
+  >
+    <ng-template #dataTableExpand let-item="item">
+      <div style="padding: 5px; color: gray">hihi</div>
+    </ng-template>
+    <data-table-column
+      [header]="'Hình ảnh'"
+      [width]="'20%'">
+      <ng-template #dataTableCell let-item="item">
+        <input class="field" type="file" *ngIf="item.isModify">
+        <ng-container *ngIf="!item.isModify"><img src="{{item?.productImageUrls[0]}}"></ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Tên hàng hóa'"
+      [sortable]="true"
+      [width]="'20%'">
+      <ng-template #dataTableCell let-item="item">
+        <input class="field" type="text" *ngIf="item.isModify" [(ngModel)]="item.name">
+        <ng-container *ngIf="!item.isModify">{{item.name}}</ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Số lượng'"
+      [sortable]="true"
+      [width]="'10%'">
+      <ng-template #dataTableCell let-item="item">
+        <input class="field" type="number" min="0" *ngIf="item.isModify" [(ngModel)]="item.remain">
+        <ng-container *ngIf="!item.isModify">{{item.remain}}</ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Giá tiền'"
+      [sortable]="true"
+      [width]="'10%'">
+      <ng-template #dataTableCell let-item="item">
+        <input class="field" type="text" *ngIf="item.isModify" [(ngModel)]="item.price">
+        <ng-container *ngIf="!item.isModify">{{item.price}}</ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Nhà sản xuất'"
+      [sortable]="true"
+      [width]="'10%'">
+      <ng-template #dataTableCell let-item="item">
+        <select class="field" *ngIf="item.isModify" [(ngModel)]="item.manufacture"></select>
+        <ng-container *ngIf="!item.isModify">{{item.manufacture.name}}</ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Năm sản xuất'"
+      [sortable]="true"
+      [width]="'10%'">
+      <ng-template #dataTableCell let-item="item">
+        <input class="field" type="text" *ngIf="item.isModify" [(ngModel)]="item.manufacutreYear">
+        <ng-container *ngIf="!item.isModify">{{item.manufacutreYear}}</ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Tỉ lệ giảm giá'"
+      [sortable]="true"
+      [width]="'10%'">
+      <ng-template #dataTableCell let-item="item">
+        <input class="field" type="number" *ngIf="item.isModify" [(ngModel)]="item.promotionRate">
+        <ng-container *ngIf="!item.isModify">{{item.promotionRate}}</ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Thao tác'"
+      [width]="'10%'">
+      <ng-template #dataTableCell let-item="item">
+        <ng-container *ngIf="item.isModify">
+          <button class="btn btn-success">Hoàn tất</button>
+        </ng-container>
+        <ng-container *ngIf="!item.isModify">
+          <button class="btn btn-warning">Sửa</button>
+          <button class="btn btn-danger">Xóa</button>
+        </ng-container>
+      </ng-template>
+    </data-table-column>
+  </data-table>
+</div><!-- /.page-content -->

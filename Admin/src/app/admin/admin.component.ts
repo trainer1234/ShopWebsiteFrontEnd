@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
+  userName: string;
   constructor() { }
 
   ngOnInit() {
+    this.userName = sessionStorage.getItem('currentUser');
   }
 
 }

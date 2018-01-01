@@ -5,11 +5,12 @@ export class Product {
   name: string;
   remain: number;
   price: number;
-  manufacture: Manufacture;
+  manufacture: Manufacture = new Manufacture();
   manufacutreYear: number;
-  productImageUrls: string[];
+  productImageUrls: string[] = [];
   type: number;
   specificType: number;
   promotionRate: number;
   quantity?: number;
+  isModify = false;
 }

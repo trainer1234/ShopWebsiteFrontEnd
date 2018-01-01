@@ -24,10 +24,10 @@
         <ul class="nav ace-nav">
           <li class="light-blue dropdown-modal">
             <a data-toggle="dropdown" class="dropdown-toggle">
-              <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
+              <img class="nav-user-photo" src=""/>
               <span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									{{userName}}
 								</span>
 
               <i class="ace-icon fa fa-caret-down"></i>
@@ -88,12 +88,42 @@
           <b class="arrow"></b>
         </li>
         <li>
-          <a routerLink="product-manager">
+          <a class="dropdown-toggle">
             <i class="menu-icon fa fa-desktop"></i>
             <span class="menu-text">
 								Quản lý hàng hóa
 							</span>
+            <b class="arrow fa fa-angle-down"></b>
           </a>
+
+          <b class="arrow"></b>
+
+          <ul class="submenu">
+            <li class="">
+              <a routerLink="/product-manager/phone">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Điện thoại
+              </a>
+            </li>
+            <li class="">
+              <a routerLink="/product-manager/tablet">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Máy tính bảng
+              </a>
+            </li>
+            <li class="">
+              <a routerLink="/product-manager/laptop">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Laptop
+              </a>
+            </li>
+            <li class="">
+              <a routerLink="/product-manager/accessitory">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Phụ kiện
+              </a>
+            </li>
+          </ul>
         </li>
         <li >
           <a routerLink="product-property-manager">
