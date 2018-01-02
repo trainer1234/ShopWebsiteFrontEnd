@@ -1,0 +1,78 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <i class="ace-icon fa fa-home home-icon"></i>
+      <a routerLink="">Home</a>
+    </li>
+    <li class="active">Quản lý hàng hóa</li>
+    <li class="active">Điện thoại</li>
+  </ul><!-- /.breadcrumb -->
+</div>
+
+<div class="page-content">
+  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()">Thêm hãng sản xuất</button>
+
+  <data-table headerTitle="Danh sách hãng sản xuất"
+              [items]="currentPageManufactures"
+              [itemCount]="manufacturesCount"
+              (reload)="reload($event)"
+
+              [limit]="pageLimit"
+              [indexColumn]="false"
+  >
+    <ng-template #dataTableExpand let-item="item">
+      <div style="padding: 5px; color: gray">hihi</div>
+    </ng-template>
+    <data-table-column
+      [header]="'Tên hãng sản xuất'"
+      [sortable]="true"
+      [width]="'20%'">
+      <ng-template #dataTableCell let-item="item">
+        <input class="field" type="text" *ngIf="item.isModify" [(ngModel)]="item.name">
+        <ng-container *ngIf="!item.isModify">{{item.name}}</ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Thuộc loại hàng hóa'"
+      [width]="'20%'">
+      <ng-template #dataTableCell let-item="item">
+        <ng-container *ngIf="item.isModify">
+          <label><input type="checkbox" value="'0'"
+                        [checked]="item.types.indexOf('0') != -1" (change)="choosenManufacture(item, '0')">Điện thoại</label>
+          <br/>
+          <label><input type="checkbox" value="'1'"
+                        [checked]="item.types.indexOf('1') != -1" (change)="choosenManufacture(item, '1')">Laptop</label>
+          <br/>
+          <label><input type="checkbox" value="'2'"
+                        [checked]="item.types.indexOf('2') != -1" (change)="choosenManufacture(item, '2')">Máy tính bảng</label>
+          <br/>
+          <label><input type="checkbox" value="'3'"
+                        [checked]="item.types.indexOf('3') != -1" (change)="choosenManufacture(item, '3')">Phụ kiện</label>
+        </ng-container>
+        <ng-container *ngIf="!item.isModify">
+          <p *ngFor="let type of item.types">
+            <ng-container [ngSwitch]="type">
+              <ng-container *ngSwitchCase="'0'">Điện thoại</ng-container>
+              <ng-container *ngSwitchCase="'1'">Laptop</ng-container>
+              <ng-container *ngSwitchCase="'2'">Máy tính bảng</ng-container>
+              <ng-container *ngSwitchCase="'3'">Phụ kiện</ng-container>
+            </ng-container>
+          </p>
+        </ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Thao tác'"
+      [width]="'20%'">
+      <ng-template #dataTableCell let-item="item">
+        <ng-container *ngIf="item.isModify">
+          <button class="btn btn-success" (click)="finishAddNew(item)">Hoàn tất</button>
+        </ng-container>
+        <ng-container *ngIf="!item.isModify">
+          <button class="btn btn-warning">Sửa</button>
+          <button class="btn btn-danger">Xóa</button>
+        </ng-container>
+      </ng-template>
+    </data-table-column>
+  </data-table>
+</div><!-- /.page-content -->

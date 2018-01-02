@@ -14,6 +14,8 @@ import {PhoneComponent} from './product-manager/phone/phone.component';
 import {TabletComponent} from './product-manager/tablet/tablet.component';
 import {AccessitoryComponent} from './product-manager/accessitory/accessitory.component';
 import {LaptopComponent} from './product-manager/laptop/laptop.component';
+import {ManufactureService} from './shared/services/manufacture.service';
+import {ManufactureManagerComponent} from './manufacture-manager/manufacture-manager.component';
 
 const routes: Routes = [
   {
@@ -76,6 +78,10 @@ const routes: Routes = [
             component: FinishedOrderManagerComponent
           }
         ]
+      },
+      {
+        path: 'manufacture-manager',
+        component: ManufactureManagerComponent
       },
       {
         path: 'product-property-manager',

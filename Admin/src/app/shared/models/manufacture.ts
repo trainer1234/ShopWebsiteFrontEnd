@@ -1,5 +1,8 @@
 export class Manufacture {
   id: string;
   name: string;
-  types: string[];
+  types: string[] = [];
+  isModify = false;
+
+  constructor() {}
 }

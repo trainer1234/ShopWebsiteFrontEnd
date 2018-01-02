@@ -10,7 +10,7 @@ export class AuthService {
   }
 
   getAccessToken() {
-    return 'bearer' + sessionStorage.getItem('accessToken');
+    return 'bearer ' + sessionStorage.getItem('accessToken');
   }
 
   login(username: string, password: string) {

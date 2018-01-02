@@ -10,7 +10,7 @@
 </div>
 
 <div class="page-content">
-  <button class="btn btn-success" (click)="addNew()">Add new</button>
+  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()">Thêm hàng hóa</button>
 
   <data-table headerTitle="Danh sách điện thoại"
               [items]="currentPagePhones"
@@ -26,9 +26,9 @@
     </ng-template>
     <data-table-column
       [header]="'Hình ảnh'"
-      [width]="'20%'">
+      [width]="'15%'">
       <ng-template #dataTableCell let-item="item">
-        <input class="field" type="file" *ngIf="item.isModify">
+        <input class="field" type="file" *ngIf="item.isModify" ng2FileSelect [uploader]="uploader">
         <ng-container *ngIf="!item.isModify"><img src="{{item?.productImageUrls[0]}}"></ng-container>
       </ng-template>
     </data-table-column>
@@ -88,10 +88,10 @@
     </data-table-column>
     <data-table-column
       [header]="'Thao tác'"
-      [width]="'10%'">
+      [width]="'15%'">
       <ng-template #dataTableCell let-item="item">
         <ng-container *ngIf="item.isModify">
-          <button class="btn btn-success">Hoàn tất</button>
+          <button class="btn btn-success" (click)="finishAddNew(item)">Hoàn tất</button>
         </ng-container>
         <ng-container *ngIf="!item.isModify">
           <button class="btn btn-warning">Sửa</button>
