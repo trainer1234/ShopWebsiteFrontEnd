@@ -10,12 +10,16 @@
 </div>
 
 <div class="page-content">
-  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()">Thêm hãng sản xuất</button>
+  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
   <data-table headerTitle="Danh sách hãng sản xuất"
               [items]="currentPageManufactures"
               [itemCount]="manufacturesCount"
               (reload)="reload($event)"
+
+              [limit]="10"
+              [sortBy]="'name'"
+              [sortAsc]="false"
 
               [limit]="pageLimit"
               [indexColumn]="false"
@@ -26,6 +30,7 @@
     <data-table-column
       [header]="'Tên hãng sản xuất'"
       [sortable]="true"
+      [property]="'name'"
       [width]="'20%'">
       <ng-template #dataTableCell let-item="item">
         <input class="field" type="text" *ngIf="item.isModify" [(ngModel)]="item.name">
@@ -37,25 +42,25 @@
       [width]="'20%'">
       <ng-template #dataTableCell let-item="item">
         <ng-container *ngIf="item.isModify">
-          <label><input type="checkbox" value="'0'"
-                        [checked]="item.types.indexOf('0') != -1" (change)="choosenManufacture(item, '0')">Điện thoại</label>
+          <label><input type="checkbox" value="0"
+                        [checked]="item.types.indexOf(0) != -1" (change)="chooseManufacture(item, 0)">Điện thoại</label>
           <br/>
-          <label><input type="checkbox" value="'1'"
-                        [checked]="item.types.indexOf('1') != -1" (change)="choosenManufacture(item, '1')">Laptop</label>
+          <label><input type="checkbox" value="1"
+                        [checked]="item.types.indexOf(1) != -1" (change)="chooseManufacture(item, 1)">Laptop</label>
           <br/>
-          <label><input type="checkbox" value="'2'"
-                        [checked]="item.types.indexOf('2') != -1" (change)="choosenManufacture(item, '2')">Máy tính bảng</label>
+          <label><input type="checkbox" value="2"
+                        [checked]="item.types.indexOf(2) != -1" (change)="chooseManufacture(item, 2)">Máy tính bảng</label>
           <br/>
-          <label><input type="checkbox" value="'3'"
-                        [checked]="item.types.indexOf('3') != -1" (change)="choosenManufacture(item, '3')">Phụ kiện</label>
+          <label><input type="checkbox" value="3"
+                        [checked]="item.types.indexOf(3) != -1" (change)="chooseManufacture(item, 3)">Phụ kiện</label>
         </ng-container>
         <ng-container *ngIf="!item.isModify">
           <p *ngFor="let type of item.types">
             <ng-container [ngSwitch]="type">
-              <ng-container *ngSwitchCase="'0'">Điện thoại</ng-container>
-              <ng-container *ngSwitchCase="'1'">Laptop</ng-container>
-              <ng-container *ngSwitchCase="'2'">Máy tính bảng</ng-container>
-              <ng-container *ngSwitchCase="'3'">Phụ kiện</ng-container>
+              <ng-container *ngSwitchCase="0">Điện thoại</ng-container>
+              <ng-container *ngSwitchCase="1">Laptop</ng-container>
+              <ng-container *ngSwitchCase="2">Máy tính bảng</ng-container>
+              <ng-container *ngSwitchCase="3">Phụ kiện</ng-container>
             </ng-container>
           </p>
         </ng-container>
@@ -66,11 +71,11 @@
       [width]="'20%'">
       <ng-template #dataTableCell let-item="item">
         <ng-container *ngIf="item.isModify">
-          <button class="btn btn-success" (click)="finishAddNew(item)">Hoàn tất</button>
+          <button class="btn btn-success" (click)="finish(item)"><i class="fa fa-check" aria-hidden="true"></i></button>
         </ng-container>
         <ng-container *ngIf="!item.isModify">
-          <button class="btn btn-warning">Sửa</button>
-          <button class="btn btn-danger">Xóa</button>
+          <button class="btn btn-warning" (click)="edit(item)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <button class="btn btn-danger" (click)="remove(item)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </ng-container>
       </ng-template>
     </data-table-column>

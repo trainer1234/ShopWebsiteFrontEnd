@@ -27,6 +27,7 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {ProductService} from './shared/services/product.service';
 import {ManufactureService} from './shared/services/manufacture.service';
 import { ManufactureManagerComponent } from './manufacture-manager/manufacture-manager.component';
+import {PropertyService} from './shared/services/property.service';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ManufactureManagerComponent } from './manufacture-manager/manufacture-m
     AuthGuard,
     AuthService,
     ProductService,
+    PropertyService,
     ManufactureService
   ],
   bootstrap: [AppComponent]

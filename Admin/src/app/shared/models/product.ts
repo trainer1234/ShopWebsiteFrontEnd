@@ -6,7 +6,7 @@ export class Product {
   remain: number;
   price: number;
   manufacture: Manufacture = new Manufacture();
-  manufacutreYear: number;
+  manufactureYear: number;
   productImageUrls: string[] = [];
   type: number;
   specificType: number;

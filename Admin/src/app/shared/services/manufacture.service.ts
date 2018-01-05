@@ -7,10 +7,14 @@ import {Manufacture} from '../models/manufacture';
 export class ManufactureService {
   getManufactureUrl: string;
   addManufactureUrl: string;
+  editManufactureUrl: string;
+  removeManufactureUrl: string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.getManufactureUrl = authService.apiUrl + 'manufacture/get';
     this.addManufactureUrl = authService.apiUrl + 'manufacture/add';
+    this.editManufactureUrl = authService.apiUrl + 'manufacture/edit';
+    this.removeManufactureUrl = authService.apiUrl + 'manufacture/remove';
   }
 
   getManufacture() {
@@ -29,5 +33,33 @@ export class ManufactureService {
       )
     };
     return this.http.post(url, manufacture, options);
+  }
+
+  editManufacture(manufacture: Manufacture) {
+    const url = this.editManufactureUrl;
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.authService.getAccessToken()
+        }
+      )
+    };
+    return this.http.put(url, manufacture, options);
+  }
+
+  removeManufacture(manufactureId: string) {
+    const url = this.removeManufactureUrl;
+    const data: FormData = new FormData();
+    data.append('manufactureId', manufactureId);
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Accept': 'application/json',
+          'Authorization': this.authService.getAccessToken()
+        }
+      )
+    };
+    return this.http.post(url, data, options);
   }
 }

@@ -10,7 +10,7 @@
 </div>
 
 <div class="page-content">
-  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()">Thêm hàng hóa</button>
+  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
   <data-table headerTitle="Danh sách điện thoại"
               [items]="currentPagePhones"
@@ -64,7 +64,9 @@
       [sortable]="true"
       [width]="'10%'">
       <ng-template #dataTableCell let-item="item">
-        <select class="field" *ngIf="item.isModify" [(ngModel)]="item.manufacture"></select>
+        <select class="field" *ngIf="item.isModify" [(ngModel)]="item.manufacture">
+          <option *ngFor="let manufacture of manufactures" [ngValue]="manufacture">{{manufacture.name}}</option>
+        </select>
         <ng-container *ngIf="!item.isModify">{{item.manufacture.name}}</ng-container>
       </ng-template>
     </data-table-column>
@@ -73,8 +75,8 @@
       [sortable]="true"
       [width]="'10%'">
       <ng-template #dataTableCell let-item="item">
-        <input class="field" type="text" *ngIf="item.isModify" [(ngModel)]="item.manufacutreYear">
-        <ng-container *ngIf="!item.isModify">{{item.manufacutreYear}}</ng-container>
+        <input class="field" type="text" *ngIf="item.isModify" [(ngModel)]="item.manufactureYear">
+        <ng-container *ngIf="!item.isModify">{{item.manufactureYear}}</ng-container>
       </ng-template>
     </data-table-column>
     <data-table-column
@@ -88,14 +90,14 @@
     </data-table-column>
     <data-table-column
       [header]="'Thao tác'"
-      [width]="'15%'">
+      [width]="'10%'">
       <ng-template #dataTableCell let-item="item">
         <ng-container *ngIf="item.isModify">
-          <button class="btn btn-success" (click)="finishAddNew(item)">Hoàn tất</button>
+          <button class="btn btn-success" (click)="finish(item)"><i class="fa fa-check" aria-hidden="true"></i></button>
         </ng-container>
         <ng-container *ngIf="!item.isModify">
-          <button class="btn btn-warning">Sửa</button>
-          <button class="btn btn-danger">Xóa</button>
+          <button class="btn btn-warning" (click)="edit(item)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <button class="btn btn-danger" (click)="remove(item)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </ng-container>
       </ng-template>
     </data-table-column>
