@@ -31,9 +31,12 @@ export class PhoneComponent implements OnInit {
   uploader: FileUploader;
   selectedImageUrlPaths: any[] = [];
 
-  isAddNew = false;
-  isModify = false;
+  isAddNewProduct = false;
+  isModifyProduct = false;
+  isAddNewProperty = false;
+
   selectedProduct: Product = new Product();
+  newProperty: Property = new Property();
 
   constructor(private authService: AuthService, private productService: ProductService,
               private sanitizer: DomSanitizer, private manufactureService: ManufactureService,
@@ -115,7 +118,7 @@ export class PhoneComponent implements OnInit {
       console.log(this.selectedProduct.productImageUrls);
       this.productService.addProduct(this.selectedProduct).subscribe(
         data => {
-          this.selectedProduct.isModify = false;
+          this.selectedProduct.isModifyProduct = false;
         },
         err => {
           console.log(err);
@@ -131,14 +134,16 @@ export class PhoneComponent implements OnInit {
     this.phonesResource.query(event).then(phones => this.currentPagePhones = phones);
   }
 
-  addNew() {
-    if (this.isModify || this.isAddNew) {
+  addNewProduct(item: Product) {
+    if (this.isModifyProduct || this.isAddNewProduct) {
       return;
     }
-    this.isAddNew = true;
-    const newProduct = new Product();
-    newProduct.isModify = true;
-    this.phones.push(newProduct);
+
+    this.isAddNewProduct = true;
+    this.selectedProduct = new Product();
+    this.selectedProduct.isModifyProduct = true;
+
+    this.phones.push(this.selectedProduct);
     this.phonesResource = new DataTableResource(this.phones);
     this.phonesResource.count().then(count => this.phonesCount = count);
 
@@ -151,7 +156,7 @@ export class PhoneComponent implements OnInit {
   }
 
   finish(item: Product) {
-    if (this.isAddNew) {
+    if (this.isAddNewProduct) {
       this.finishAddNew(item);
     } else {
       this.finishEdit(item);
@@ -160,14 +165,13 @@ export class PhoneComponent implements OnInit {
 
   finishAddNew(item: Product) {
     console.log(item);
-    this.selectedProduct = item;
     if (this.uploader.queue.length > 0) {
       this.uploader.queue[0].upload();
     } else {
       this.productService.addProduct(this.selectedProduct).subscribe(
         data => {
-          item.isModify = false;
-          this.isAddNew = false;
+          item.isModifyProduct = false;
+          this.isAddNewProduct = false;
         },
         err => {
           console.log(err);
@@ -177,8 +181,9 @@ export class PhoneComponent implements OnInit {
   }
 
   edit(item: Product) {
-    item.isModify = true;
-    this.isModify = true;
+    item.isModifyProduct = true;
+    this.selectedProduct = item;
+    this.isModifyProduct = true;
   }
 
   finishEdit(item: Product) {
@@ -189,8 +194,8 @@ export class PhoneComponent implements OnInit {
     } else {
       this.productService.editProduct(item).subscribe(
         data => {
-          item.isModify = false;
-          this.isModify = false;
+          item.isModifyProduct = false;
+          this.isModifyProduct = false;
         },
         err => {
           console.log(err);
@@ -214,6 +219,25 @@ export class PhoneComponent implements OnInit {
     this.phonesResource = new DataTableResource(this.phones);
     this.phonesResource.count().then(count => this.phonesCount = count);
     this.updateDataTable();
+  }
+
+  addNewProperty() {
+    this.newProperty = new Property();
+    this.isAddNewProperty = true;
+  }
+
+  finishAddNewProperty() {
+    if (!this.selectedProduct.properties) {
+      this.selectedProduct.properties = [];
+    }
+    this.selectedProduct.properties.push(this.newProperty);
+    this.isAddNewProperty = false;
+  }
+
+  removeProperty(propertyIndex: number) {
+    if (confirm('Bạn có chắc chắn muốn xóa ?')) {
+      this.selectedProduct.properties.splice(propertyIndex, 1);
+    }
   }
 
   updateDataTable() {

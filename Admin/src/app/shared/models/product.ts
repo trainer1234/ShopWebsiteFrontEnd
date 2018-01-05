@@ -14,6 +14,6 @@ export class Product {
   promotionRate: number;
   quantity?: number;
   detail: string;
-  properties: Property;
-  isModify = false;
+  properties: Property[] = [];
+  isModifyProduct = false;
 }
