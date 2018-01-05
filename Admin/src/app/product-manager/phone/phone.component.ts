@@ -7,6 +7,8 @@ import {ProductService} from '../../shared/services/product.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ManufactureService} from '../../shared/services/manufacture.service';
 import {Manufacture} from '../../shared/models/manufacture';
+import {Property} from '../../shared/models/property';
+import {PropertyService} from '../../shared/services/property.service';
 
 @Component({
   selector: 'app-phone',
@@ -18,12 +20,14 @@ export class PhoneComponent implements OnInit {
   currentPagePhones: Product[] = [];
 
   manufactures: Manufacture[] = [];
+  properties: Property[] = [];
 
   phonesCount: number;
   phonesResource = new DataTableResource(this.phones);
 
   pageLimit = 10;
 
+  editorOptions = {};
   uploader: FileUploader;
   selectedImageUrlPaths: any[] = [];
 
@@ -32,11 +36,21 @@ export class PhoneComponent implements OnInit {
   selectedProduct: Product = new Product();
 
   constructor(private authService: AuthService, private productService: ProductService,
-              private sanitizer: DomSanitizer, private manufactureService: ManufactureService) {
+              private sanitizer: DomSanitizer, private manufactureService: ManufactureService,
+              private propertyService: PropertyService) {
 
     this.manufactureService.getManufacture().subscribe(
       data => {
         this.manufactures = data['content'];
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+    this.propertyService.getAllProperties().subscribe(
+      data => {
+        this.properties = data['content'];
       },
       err => {
         console.log(err);
@@ -54,6 +68,32 @@ export class PhoneComponent implements OnInit {
         console.log(err);
       }
     );
+
+    this.editorOptions = {
+      heightMin: 600,
+      heightMax: 600,
+      requestHeaders: {
+        'Authorization': authService.getAccessToken()
+      },
+      imageUploadParam: 'imgFile',
+      imageUploadURL: this.productService.uploadImageUrl,
+      imageUploadMethod: 'POST',
+      imageMaxSize: 10 * 1024 * 1024,
+      events: {
+        'froalaEditor.image.uploaded': function (e, editor, response) {
+          console.log(response);
+          const url = JSON.parse(response)['content'];
+          console.log(url);
+          editor.image.insert(url);
+
+          return false;
+        },
+        'froalaEditor.image.error': function (e, editor, error, response) {
+          console.log(response);
+          console.log(error);
+        }
+      }
+    };
 
     this.uploader = new FileUploader(
       {

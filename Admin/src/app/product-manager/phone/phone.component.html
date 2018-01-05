@@ -10,7 +10,9 @@
 </div>
 
 <div class="page-content">
-  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+  <button class="btn btn-sm btn-success" style="float: right; margin-left: 3px" (click)="addNew()"><i class="fa fa-plus"
+                                                                                                      aria-hidden="true"></i>
+  </button>
 
   <data-table headerTitle="Danh sách điện thoại"
               [items]="currentPagePhones"
@@ -22,7 +24,53 @@
               [indexColumn]="false"
   >
     <ng-template #dataTableExpand let-item="item">
-      <div style="padding: 5px; color: gray">hihi</div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#menu1">Chi tiết sản phẩm</a></li>
+        <li><a data-toggle="tab" href="#menu2">Thông số sản phẩm</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="menu1" class="tab-pane fade in active">
+          <ng-container *ngIf="!item.isModify">
+            <div [froalaView]="item.detail"></div>
+          </ng-container>
+          <ng-container *ngIf="item.isModify">
+            <div [froalaEditor]="editorOptions" [(froalaModel)]="item.detail"></div>
+          </ng-container>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th width="30%">Thuộc tính</th>
+              <th width="70%">Chi tiết</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let itemProperty of item.properties">
+              <ng-container *ngIf="item.isModify">
+                <select class="field" [(ngModel)]="itemProperty.name">
+                  <option *ngFor="let property of properties" [ngValue]="property">{{property.name}}</option>
+                </select>
+                <input type="text" [(ngModel)]="itemProperty.detail">
+              </ng-container>
+              <ng-container *ngIf="!item.isModify">
+                <td>{{itemProperty.name}}</td>
+                <td>{{itemProperty.detail}}</td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button class="btn btn-block btn-success" style="float: right; margin-left: 3px"
+                                      (click)="addNew()">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Thêm thuộc tính
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </ng-template>
     <data-table-column
       [header]="'Hình ảnh'"
@@ -96,7 +144,8 @@
           <button class="btn btn-success" (click)="finish(item)"><i class="fa fa-check" aria-hidden="true"></i></button>
         </ng-container>
         <ng-container *ngIf="!item.isModify">
-          <button class="btn btn-warning" (click)="edit(item)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <button class="btn btn-warning" (click)="edit(item)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </button>
           <button class="btn btn-danger" (click)="remove(item)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </ng-container>
       </ng-template>

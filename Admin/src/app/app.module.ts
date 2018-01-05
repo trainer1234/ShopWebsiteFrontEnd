@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {CommonModule} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
@@ -26,8 +25,10 @@ import {LaptopComponent} from './product-manager/laptop/laptop.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {ProductService} from './shared/services/product.service';
 import {ManufactureService} from './shared/services/manufacture.service';
-import { ManufactureManagerComponent } from './manufacture-manager/manufacture-manager.component';
+import {ManufactureManagerComponent} from './manufacture-manager/manufacture-manager.component';
 import {PropertyService} from './shared/services/property.service';
+import 'froala-editor/js/froala_editor.pkgd.min.js';
+import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import {PropertyService} from './shared/services/property.service';
     ReactiveFormsModule,
     FormsModule,
     DataTableModule,
-    FileUploadModule
+    FileUploadModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   providers: [
     FormBuilder,

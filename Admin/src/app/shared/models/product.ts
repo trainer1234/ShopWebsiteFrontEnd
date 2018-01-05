@@ -1,4 +1,5 @@
 import {Manufacture} from './manufacture';
+import {Property} from './property';
 
 export class Product {
   id: string;
@@ -12,5 +13,7 @@ export class Product {
   specificType: number;
   promotionRate: number;
   quantity?: number;
+  detail: string;
+  properties: Property;
   isModify = false;
 }
