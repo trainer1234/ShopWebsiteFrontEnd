@@ -11,6 +11,7 @@ export class ProductService {
   addProductUrl: string;
   editProductUrl: string;
   removeProductUrl: string;
+  refillProductUrl: string;
   uploadImageUrl: string;
 
   constructor(private authService: AuthService, private http: HttpClient) {
@@ -20,6 +21,7 @@ export class ProductService {
     this.addProductUrl = authService.apiUrl + 'product/add/';
     this.editProductUrl = authService.apiUrl + 'product/edit/';
     this.removeProductUrl = authService.apiUrl + 'product/remove/';
+    this.refillProductUrl = authService.apiUrl + 'product/increase/';
   }
 
   getAllProductsByType(type: string, num: number) {
@@ -70,6 +72,22 @@ export class ProductService {
     const url = this.removeProductUrl;
     const data: FormData = new FormData();
     data.append('productId', productId);
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Accept': 'application/json',
+          'Authorization': this.authService.getAccessToken()
+        }
+      )
+    };
+    return this.http.post(url, data, options);
+  }
+
+  refillProduct(productId: string, amount: string) {
+    const url = this.refillProductUrl;
+    const data: FormData = new FormData();
+    data.append('productId', productId);
+    data.append('amount', amount);
     const options = {
       headers: new HttpHeaders(
         {

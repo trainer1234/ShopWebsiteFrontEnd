@@ -16,14 +16,14 @@ import {PropertyService} from '../../shared/services/property.service';
   styleUrls: ['./phone.component.css']
 })
 export class PhoneComponent implements OnInit {
-  phones: Product[] = [];
-  currentPagePhones: Product[] = [];
+  products: Product[] = [];
+  currentPageProducts: Product[] = [];
 
   manufactures: Manufacture[] = [];
   properties: Property[] = [];
 
-  phonesCount: number;
-  phonesResource = new DataTableResource(this.phones);
+  productsCount: number;
+  productsResource = new DataTableResource(this.products);
 
   pageLimit = 10;
 
@@ -62,9 +62,9 @@ export class PhoneComponent implements OnInit {
 
     this.productService.getAllProductsByType('0', null).subscribe(
       data => {
-        this.phones = data['content'];
-        this.phonesResource = new DataTableResource(this.phones);
-        this.phonesResource.count().then(count => this.phonesCount = count);
+        this.products = data['content'];
+        this.productsResource = new DataTableResource(this.products);
+        this.productsResource.count().then(count => this.productsCount = count);
         this.updateDataTable();
       },
       err => {
@@ -131,7 +131,7 @@ export class PhoneComponent implements OnInit {
   }
 
   reload(event) {
-    this.phonesResource.query(event).then(phones => this.currentPagePhones = phones);
+    this.productsResource.query(event).then(products => this.currentPageProducts = products);
   }
 
   addNewProduct(item: Product) {
@@ -143,16 +143,16 @@ export class PhoneComponent implements OnInit {
     this.selectedProduct = new Product();
     this.selectedProduct.isModifyProduct = true;
 
-    this.phones.push(this.selectedProduct);
-    this.phonesResource = new DataTableResource(this.phones);
-    this.phonesResource.count().then(count => this.phonesCount = count);
+    this.products.push(this.selectedProduct);
+    this.productsResource = new DataTableResource(this.products);
+    this.productsResource.count().then(count => this.productsCount = count);
 
     const query = {
       limit: this.pageLimit,
-      offset: (this.phones.length % this.pageLimit) && this.phones.length ?
-        (this.phones.length - this.phones.length % this.pageLimit) : this.phones.length - this.pageLimit
+      offset: (this.products.length % this.pageLimit) && this.products.length ?
+        (this.products.length - this.products.length % this.pageLimit) : this.products.length - this.pageLimit
     };
-    this.phonesResource.query(query).then(phones => this.currentPagePhones = phones);
+    this.productsResource.query(query).then(products => this.currentPageProducts = products);
   }
 
   finish(item: Product) {
@@ -172,6 +172,24 @@ export class PhoneComponent implements OnInit {
         data => {
           item.isModifyProduct = false;
           this.isAddNewProduct = false;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
+
+  refillProduct(item: Product) {
+    let quantity = prompt('Nhập số lượng hàng hóa bổ sung: ');
+    while (isNaN(Number(quantity)) || Number(quantity) < 0) {
+      quantity = prompt('Nhập số lượng hàng hóa bổ sung: \n *Chỉ được nhập vào chữ số nguyên dương');
+    }
+    if (Number(quantity) > 0) {
+      item.remain += Number(quantity);
+      this.productService.refillProduct(item.id, quantity).subscribe(
+        data => {
+
         },
         err => {
           console.log(err);
@@ -208,7 +226,7 @@ export class PhoneComponent implements OnInit {
     if (confirm('Bạn có chắc chắn muốn xóa ?')) {
       this.productService.removeProduct(item.id).subscribe(
         data => {
-          this.phones.splice(this.phones.indexOf(item), 1);
+          this.products.splice(this.products.indexOf(item), 1);
           this.updateDataTable();
         },
         err => {
@@ -216,8 +234,8 @@ export class PhoneComponent implements OnInit {
         }
       );
     }
-    this.phonesResource = new DataTableResource(this.phones);
-    this.phonesResource.count().then(count => this.phonesCount = count);
+    this.productsResource = new DataTableResource(this.products);
+    this.productsResource.count().then(count => this.productsCount = count);
     this.updateDataTable();
   }
 
@@ -232,6 +250,7 @@ export class PhoneComponent implements OnInit {
     }
     this.selectedProduct.properties.push(this.newProperty);
     this.isAddNewProperty = false;
+    console.log(this.selectedProduct);
   }
 
   removeProperty(propertyIndex: number) {
@@ -243,10 +262,10 @@ export class PhoneComponent implements OnInit {
   updateDataTable() {
     const query = {
       limit: this.pageLimit,
-      offset: (this.phones.length % this.pageLimit) && this.phones.length ?
-        ((this.phones.length - this.phones.length % this.pageLimit) < 0 ? 0 : 0)
-        : ((this.phones.length - this.pageLimit) < 0 ? 0 : 0)
+      offset: (this.products.length % this.pageLimit) && this.products.length ?
+        ((this.products.length - this.products.length % this.pageLimit) < 0 ? 0 : 0)
+        : ((this.products.length - this.pageLimit) < 0 ? 0 : 0)
     };
-    this.phonesResource.query(query).then(phones => this.currentPagePhones = phones);
+    this.productsResource.query(query).then(products => this.currentPageProducts = products);
   }
 }

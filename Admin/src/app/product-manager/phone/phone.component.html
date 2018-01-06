@@ -15,8 +15,8 @@
   </button>
 
   <data-table headerTitle="Danh sách điện thoại"
-              [items]="currentPagePhones"
-              [itemCount]="phonesCount"
+              [items]="currentPageProducts"
+              [itemCount]="productsCount"
               (reload)="reload($event)"
 
               [limit]="pageLimit"
@@ -102,7 +102,9 @@
       [width]="'15%'">
       <ng-template #dataTableCell let-item="item">
         <input class="field" type="file" *ngIf="item.isModifyProduct" ng2FileSelect [uploader]="uploader">
-        <ng-container *ngIf="!item.isModifyProduct"><img src="{{item?.productImageUrls[0]}}"></ng-container>
+        <ng-container *ngIf="!item.isModifyProduct">
+          <img *ngIf="item.productImageUrls" src="{{item?.productImageUrls[0]}}">
+        </ng-container>
       </ng-template>
     </data-table-column>
     <data-table-column
@@ -129,7 +131,13 @@
       [width]="'10%'">
       <ng-template #dataTableCell let-item="item">
         <input class="field" type="text" *ngIf="item.isModifyProduct" [(ngModel)]="item.price">
-        <ng-container *ngIf="!item.isModifyProduct">{{item.price}}</ng-container>
+        <ng-container *ngIf="!item.isModifyProduct">
+          <ng-container *ngIf="!item.promotionRate">{{item.price | number}}</ng-container>
+          <ng-container *ngIf="item.promotionRate">
+            <p class="deprecated-price">{{item.price | number}}</p>
+            <p class="promotion-price">{{item.price - item.price * item.promotionRate / 100 | number}}</p>
+          </ng-container>
+        </ng-container>
       </ng-template>
     </data-table-column>
     <data-table-column
@@ -157,8 +165,8 @@
       [sortable]="true"
       [width]="'10%'">
       <ng-template #dataTableCell let-item="item">
-        <input class="field" type="number" *ngIf="item.isModifyProduct" [(ngModel)]="item.promotionRate">
-        <ng-container *ngIf="!item.isModifyProduct">{{item.promotionRate}}</ng-container>
+        <input class="field" type="number" *ngIf="item.isModifyProduct" [(ngModel)]="item.promotionRate" min="0" max="100">
+        <ng-container *ngIf="!item.isModifyProduct">{{item.promotionRate}}%</ng-container>
       </ng-template>
     </data-table-column>
     <data-table-column
@@ -169,6 +177,8 @@
           <button class="btn btn-success" (click)="finish(item)"><i class="fa fa-check" aria-hidden="true"></i></button>
         </ng-container>
         <ng-container *ngIf="!item.isModifyProduct">
+          <button class="btn btn-primary" (click)="refillProduct(item)"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+          </button>
           <button class="btn btn-warning" (click)="edit(item)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </button>
           <button class="btn btn-danger" (click)="remove(item)"><i class="fa fa-times" aria-hidden="true"></i></button>
