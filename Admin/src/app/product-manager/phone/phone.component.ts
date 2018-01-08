@@ -63,6 +63,7 @@ export class PhoneComponent implements OnInit {
     this.productService.getAllProductsByType('0', null).subscribe(
       data => {
         this.products = data['content'];
+        console.log(this.products);
         this.productsResource = new DataTableResource(this.products);
         this.productsResource.count().then(count => this.productsCount = count);
         this.updateDataTable();
@@ -267,5 +268,9 @@ export class PhoneComponent implements OnInit {
         : ((this.products.length - this.pageLimit) < 0 ? 0 : 0)
     };
     this.productsResource.query(query).then(products => this.currentPageProducts = products);
+  }
+
+  change(event){
+    console.log(event);
   }
 }

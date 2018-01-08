@@ -50,12 +50,12 @@
             <tr *ngFor="let itemProperty of item.properties; let i = index">
               <ng-container *ngIf="item.isModifyProduct">
                 <td>
-                  <select class="field" [(ngModel)]="itemProperty.name">
+                  <select class="field" [(ngModel)]="item.properties[i]" (change)="change(item.properties[i])">
                     <option *ngFor="let property of properties" [ngValue]="property">{{property.name}}</option>
                   </select>
                 </td>
                 <td>
-                  <input class="field" type="text" [(ngModel)]="itemProperty.detail">
+                  <input class="field" type="text" [(ngModel)]="item.properties[i].detail">
                 </td>
                 <td>
                   <button class="btn btn-danger" (click)="removeProperty(i)">
@@ -64,8 +64,8 @@
                 </td>
               </ng-container>
               <ng-container *ngIf="!item.isModifyProduct">
-                <td>{{itemProperty.name}}</td>
-                <td colspan="2">{{itemProperty.detail}}</td>
+                <td>{{item.properties[i].name}}</td>
+                <td colspan="2">{{item.properties[i].detail}}</td>
               </ng-container>
             </tr>
             <tr *ngIf="isAddNewProperty">
