@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <img class="product-preview-image" src="{{product.productImageUrls[0]}}">
+    </div>
+    <div class="col-lg-6">
+      <div>
+        <h2>{{product.name}}</h2>
+        <div *ngIf="product.promotionRate > 0">
+          <p class="promotion-price">
+            {{product.price - product.promotionRate * product.price / 100 | number}} VNĐ
+            <span class="normal-price" style="padding-left: 20px;">{{product.price | number}} VNĐ</span>
+          </p>
+        </div>
+      </div>
+      <h4>Thông số cơ bản</h4>
+      <table class="table table-striped table-hover" style="width: 100%;">
+        <thead>
+        <th width="30%">Thuộc tính</th>
+        <th width="70%">Chi tiết</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let productProperty of product.properties">
+          <td>{{productProperty.name}}</td>
+          <td>{{productProperty.detail}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-block btn-danger">Mua ngay</button>
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <h4>Thông tin chi tiết</h4>
+    <div [froalaView]="product.detail"></div>
+  </div>
+</div>

@@ -12,11 +12,14 @@ export class ProductComponent implements OnInit {
 
   cartEmitter = EmitterService.get('cart');
 
+  productLink;
+
   constructor() {
   }
 
   ngOnInit() {
     this.product.quantity = 1;
+    this.productLink = '/' + this.product.id;
   }
 
   chooseProduct() {

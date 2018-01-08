@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../shared/services/order.service';
 import {Customer} from '../../shared/models/customer';
+import {EmitterService} from '../../shared/services/emitter.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,9 @@ export class CartComponent implements OnInit {
   cartItems: any = [];
   itemsQuantity = 0;
   totalPrice = 0;
+  orderId: string;
   customer: Customer = new Customer();
+  cartEmitter = EmitterService.get('cart');
 
   constructor(private orderService: OrderService) {
     this.cartItems = JSON.parse(sessionStorage.getItem('cart'));
@@ -38,12 +41,14 @@ export class CartComponent implements OnInit {
         this.totalPrice += element.price * element.quantity;
       }
     );
+    this.cartEmitter.emit('set/' + this.itemsQuantity);
   }
 
   removeItem(item) {
     this.itemsQuantity -= item.quantity;
     this.totalPrice -= item.price * item.quantity;
     this.cartItems.splice(this.cartItems.indexOf(item), 1);
+    this.cartEmitter.emit('set/' + this.itemsQuantity);
   }
 
   submitOrder() {
@@ -65,7 +70,8 @@ export class CartComponent implements OnInit {
     console.log(order);
     this.orderService.addOrder(order).subscribe(
       data => {
-        this.cartItems = [];
+        this.orderId = data['content'];
+        this.cartItems = null;
         sessionStorage.setItem('cart', null);
       },
       err => {

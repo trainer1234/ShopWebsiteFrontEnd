@@ -1,0 +1,22 @@
+.container{
+  padding: 30px 20px;
+}
+
+.product-preview-image{
+  max-width: 100%;
+}
+
+.btn{
+  cursor: pointer;
+}
+
+.normal-price{
+  text-decoration: line-through;
+  color: darkgray;
+  font-size: 16px;
+}
+
+.promotion-price{
+  color: red;
+  font-size: 26px;
+}

@@ -4,42 +4,28 @@
 </div>
 <div>
   <p><b>Hãng sản xuất</b></p>
-  <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
+  <div style="display: block;" *ngFor="let manufacture of manufactures">
+    <label><input type="checkbox" value="{{manufacture.id}}" (change)="check('m/'+manufacture.id)"> {{manufacture.name}}</label>
   </div>
-  <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
-  </div>
-  <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
-  </div>
-  <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
-  </div>
-  <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
-  </div>
-  <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
-  </div>
+
   <hr/>
   <p><b>Giá tiền</b></p>
   <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
+    <label><input type="checkbox" value="0" (change)="check('p/0')"> Dưới 5 triệu</label>
   </div>
   <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
+    <label><input type="checkbox" value="1" (change)="check('p/1')"> 5 - 7 triệu</label>
   </div>
   <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
+    <label><input type="checkbox" value="2" (change)="check('p/2')"> 7 - 10 triệu</label>
   </div>
   <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
+    <label><input type="checkbox" value="3" (change)="check('p/3')"> 10 - 20 triệu</label>
   </div>
   <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
+    <label><input type="checkbox" value="4" (change)="check('p/4')"> 20 - 30 triệu</label>
   </div>
   <div style="display: block;">
-    <label><input type="checkbox" value="Apple"> Apple</label>
+    <label><input type="checkbox" value="5"> Hơn 30 triệu</label>
   </div>
 </div>

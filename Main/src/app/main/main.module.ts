@@ -9,7 +9,6 @@ import { PhoneComponent } from './phone/phone.component';
 import { TabletComponent } from './tablet/tablet.component';
 import { AccessoriesComponent } from './accessories/accessories.component';
 import { PromotionComponent } from './promotion/promotion.component';
-import { ContactComponent } from './contact/contact.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -20,6 +19,9 @@ import {AuthService} from '../shared/services/auth.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ManufactureService} from '../shared/services/manufacture.service';
 import {OrderService} from '../shared/services/order.service';
+import { ProductOrderSearchComponent } from './product-order-search/product-order-search.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 
 @NgModule({
   imports: [
@@ -27,7 +29,9 @@ import {OrderService} from '../shared/services/order.service';
     FormsModule,
     RouterModule,
     MainRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
   ],
   providers: [
     AuthService,
@@ -35,6 +39,6 @@ import {OrderService} from '../shared/services/order.service';
     ManufactureService,
     OrderService
   ],
-  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, ContactComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent]
+  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent]
 })
 export class MainModule { }
