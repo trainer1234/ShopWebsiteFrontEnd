@@ -270,7 +270,7 @@ export class PhoneComponent implements OnInit {
     this.productsResource.query(query).then(products => this.currentPageProducts = products);
   }
 
-  change(event){
+  change(event) {
     console.log(event);
   }
 }

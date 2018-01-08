@@ -24,3 +24,16 @@ p{
 .form-control{
   width: 200px;
 }
+
+.field{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+label{
+  font-weight: bold;
+}
+
+button{
+  cursor: pointer;
+}

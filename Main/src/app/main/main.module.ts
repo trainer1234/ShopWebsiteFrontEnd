@@ -18,6 +18,8 @@ import {FormsModule} from '@angular/forms';
 import {ProductService} from '../shared/services/product.service';
 import {AuthService} from '../shared/services/auth.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ManufactureService} from '../shared/services/manufacture.service';
+import {OrderService} from '../shared/services/order.service';
 
 @NgModule({
   imports: [
@@ -29,7 +31,9 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
   ],
   providers: [
     AuthService,
-    ProductService
+    ProductService,
+    ManufactureService,
+    OrderService
   ],
   declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, ContactComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent]
 })

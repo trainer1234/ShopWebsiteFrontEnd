@@ -9,7 +9,7 @@
     </div>
     <div class="product_info">
       <h6 class="product_name"><a>{{product.name}}</a></h6>
-      <div class="product_price" *ngIf="product.promotionRate > 0">{{product.price * product.promotionRate / 100}}<span>{{product.price}}</span></div>
+      <div class="product_price" *ngIf="product.promotionRate > 0">{{product.price - product.price * product.promotionRate / 100 | number}}<span>{{product.price | number}}</span></div>
       <div class="product_price" *ngIf="product.promotionRate === 0">{{product.price | number}}</div>
     </div>
   </div>

@@ -30,43 +30,35 @@
 
 </div>
 
-<!-- Banner -->
-
-<div class="banner">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="banner_item align-items-center" style="background-image:url(./assets/images/phone.jpg)">
-          <div class="banner_category">
-            <a routerLink="phone">Điện thoại</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="banner_item align-items-center" style="background-image:url(./assets/images/tablet.jpg)">
-          <div class="banner_category">
-            <a routerLink="tablet">Máy tính bảng</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="banner_item align-items-center" style="background-image:url(./assets/images/accessrioes.png)">
-          <div class="banner_category">
-            <a routerLink="accessories">Phụ kiện</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- New Arrivals -->
 
-<div class="new_arrivals">
+<div class="new_arrivals" style="margin-top: 30px;">
   <div class="container">
     <div class="row">
       <div class="col">
-        <app-product-list [type]="'0'"></app-product-list>
+        <div class="box">
+          <h4 style="margin-left: 20px;">Điện thoại</h4>
+          <app-product-list [type]="'0'"></app-product-list>
+          <i class="see-more">Xem thêm</i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="box">
+          <h4 style="margin-left: 20px;">Điện thoại</h4>
+          <app-product-list [type]="'0'"></app-product-list>
+          <i class="see-more">Xem thêm</i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="box">
+          <h4 style="margin-left: 20px;">Điện thoại</h4>
+          <app-product-list [type]="'0'"></app-product-list>
+          <i class="see-more">Xem thêm</i>
+        </div>
       </div>
     </div>
   </div>
@@ -99,7 +91,7 @@
         <div class="benefit_item d-flex flex-row align-items-center">
           <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
           <div class="benefit_content">
-            <h6>Đổi trả trong 1 tuần</h6>
+            <h6>Đổi trả trong 7 ngày</h6>
             <p>Making it Look Like Readable</p>
           </div>
         </div>
