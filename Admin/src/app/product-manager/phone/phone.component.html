@@ -24,79 +24,79 @@
               [indexColumn]="false"
   >
     <ng-template #dataTableExpand let-item="item">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#menu1">Chi tiết sản phẩm</a></li>
-        <li><a data-toggle="tab" href="#menu2">Thông số sản phẩm</a></li>
-      </ul>
-      <div class="tab-content">
-        <div id="menu1" class="tab-pane fade in active">
-          <ng-container *ngIf="!item.isModifyProduct">
-            <div [froalaView]="item.detail"></div>
-          </ng-container>
-          <ng-container *ngIf="item.isModifyProduct">
-            <div [froalaEditor]="editorOptions" [(froalaModel)]="item.detail"></div>
-          </ng-container>
-        </div>
-        <div id="menu2" class="tab-pane fade">
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th width="45%">Thuộc tính</th>
-              <th width="50%">Chi tiết</th>
-              <th width="5%">Xóa</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let itemProperty of item.properties; let i = index">
-              <ng-container *ngIf="item.isModifyProduct">
-                <td>
-                  <select class="field" [(ngModel)]="item.properties[i]" (change)="change(item.properties[i])">
-                    <option *ngFor="let property of properties" [ngValue]="property">{{property.name}}</option>
-                  </select>
-                </td>
-                <td>
-                  <input class="field" type="text" [(ngModel)]="item.properties[i].detail">
-                </td>
-                <td>
-                  <button class="btn btn-danger" (click)="removeProperty(i)">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </ng-container>
-              <ng-container *ngIf="!item.isModifyProduct">
-                <td>{{item.properties[i].name}}</td>
-                <td colspan="2">{{item.properties[i].detail}}</td>
-              </ng-container>
-            </tr>
-            <tr *ngIf="isAddNewProperty">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#menu1">Chi tiết sản phẩm</a></li>
+      <li><a data-toggle="tab" href="#menu2">Thông số sản phẩm</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="menu1" class="tab-pane fade in active">
+        <ng-container *ngIf="!item.isModifyProduct">
+          <div [froalaView]="item.detail"></div>
+        </ng-container>
+        <ng-container *ngIf="item.isModifyProduct">
+          <div [froalaEditor]="editorOptions" [(froalaModel)]="item.detail"></div>
+        </ng-container>
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th width="45%">Thuộc tính</th>
+            <th width="50%">Chi tiết</th>
+            <th width="5%" *ngIf="item.isModifyProduct">Xóa</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let itemProperty of item.properties; let i = index">
+            <ng-container *ngIf="item.isModifyProduct">
               <td>
-                <select class="field" [(ngModel)]="newProperty.name">
-                  <option *ngFor="let property of properties" [ngValue]="property">{{property.name}}</option>
+                <select class="field" [(ngModel)]="item.properties[i].id" (ngModelChange)="change(item.properties[i])">
+                  <option *ngFor="let property of properties" [ngValue]="property.id">{{property.name}}</option>
                 </select>
               </td>
               <td>
-                <input class="field" type="text" [(ngModel)]="newProperty.detail">
+                <input class="field" type="text" [(ngModel)]="item.properties[i].detail">
               </td>
               <td>
-                <button class="btn btn-success" (click)="finishAddNewProperty()">
-                  <i class="fa fa-check" aria-hidden="true"></i>
+                <button class="btn btn-danger" (click)="removeProperty(i)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
               </td>
-            </tr>
-            <tr *ngIf="item.isModifyProduct">
-              <td colspan="3">
-                <button class="btn btn-block btn-success" style="float: right; margin-left: 3px"
-                                      (click)="addNewProperty()">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
-                  Thêm thuộc tính
-                </button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+            </ng-container>
+            <ng-container *ngIf="!item.isModifyProduct">
+              <td>{{item.properties[i].name}}</td>
+              <td colspan="2">{{item.properties[i].detail}}</td>
+            </ng-container>
+          </tr>
+          <tr *ngIf="isAddNewProperty">
+            <td>
+              <select class="field" [(ngModel)]="newProperty">
+                <option *ngFor="let property of properties" [ngValue]="property">{{property.name}}</option>
+              </select>
+            </td>
+            <td>
+              <input class="field" type="text" [(ngModel)]="newProperty.detail">
+            </td>
+            <td>
+              <button class="btn btn-success" (click)="finishAddNewProperty()">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="item.isModifyProduct">
+            <td colspan="3">
+              <button class="btn btn-block btn-success" style="float: right; margin-left: 3px"
+                      (click)="addNewProperty()">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Thêm thuộc tính
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-    </ng-template>
+    </div>
+  </ng-template>
     <data-table-column
       [header]="'Hình ảnh'"
       [width]="'15%'">
@@ -145,8 +145,8 @@
       [sortable]="true"
       [width]="'10%'">
       <ng-template #dataTableCell let-item="item">
-        <select class="field" *ngIf="item.isModifyProduct" [(ngModel)]="item.manufacture">
-          <option *ngFor="let manufacture of manufactures" [ngValue]="manufacture">{{manufacture.name}}</option>
+        <select class="field" *ngIf="item.isModifyProduct" [(ngModel)]="item.manufacture.id">
+          <option *ngFor="let manufacture of manufactures" [ngValue]="manufacture.id">{{manufacture.name}}</option>
         </select>
         <ng-container *ngIf="!item.isModifyProduct">{{item.manufacture.name}}</ng-container>
       </ng-template>

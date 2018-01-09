@@ -42,7 +42,7 @@ export class TabletComponent implements OnInit {
               private sanitizer: DomSanitizer, private manufactureService: ManufactureService,
               private propertyService: PropertyService) {
 
-    this.manufactureService.getManufacture().subscribe(
+    this.manufactureService.getManufacturebyType('2').subscribe(
       data => {
         this.manufactures = data['content'];
       },
@@ -266,5 +266,15 @@ export class TabletComponent implements OnInit {
         : ((this.products.length - this.pageLimit) < 0 ? 0 : 0)
     };
     this.productsResource.query(query).then(products => this.currentPageProducts = products);
+  }
+
+  change(property) {
+    this.properties.forEach(
+      element => {
+        if (element.id === property.id) {
+          property.name = element.name;
+        }
+      }
+    );
   }
 }

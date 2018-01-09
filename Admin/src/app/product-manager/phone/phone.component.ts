@@ -42,7 +42,7 @@ export class PhoneComponent implements OnInit {
               private sanitizer: DomSanitizer, private manufactureService: ManufactureService,
               private propertyService: PropertyService) {
 
-    this.manufactureService.getManufacture().subscribe(
+    this.manufactureService.getManufacturebyType('0').subscribe(
       data => {
         this.manufactures = data['content'];
       },
@@ -246,6 +246,7 @@ export class PhoneComponent implements OnInit {
   }
 
   finishAddNewProperty() {
+    console.log(this.newProperty);
     if (!this.selectedProduct.properties) {
       this.selectedProduct.properties = [];
     }
@@ -270,7 +271,13 @@ export class PhoneComponent implements OnInit {
     this.productsResource.query(query).then(products => this.currentPageProducts = products);
   }
 
-  change(event) {
-    console.log(event);
+  change(property) {
+    this.properties.forEach(
+      element => {
+        if (element.id === property.id) {
+          property.name = element.name;
+        }
+      }
+    );
   }
 }

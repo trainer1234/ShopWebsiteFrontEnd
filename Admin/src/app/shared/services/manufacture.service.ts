@@ -9,16 +9,23 @@ export class ManufactureService {
   addManufactureUrl: string;
   editManufactureUrl: string;
   removeManufactureUrl: string;
+  getManufactureByTypeUrl: string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.getManufactureUrl = authService.apiUrl + 'manufacture/get';
     this.addManufactureUrl = authService.apiUrl + 'manufacture/add';
     this.editManufactureUrl = authService.apiUrl + 'manufacture/edit';
     this.removeManufactureUrl = authService.apiUrl + 'manufacture/remove';
+    this.getManufactureByTypeUrl = authService.apiUrl + 'manufacture/filter/';
   }
 
   getManufacture() {
     const url = this.getManufactureUrl;
+    return this.http.get(url);
+  }
+
+  getManufacturebyType(type: string) {
+    const url = this.getManufactureByTypeUrl + type;
     return this.http.get(url);
   }
 

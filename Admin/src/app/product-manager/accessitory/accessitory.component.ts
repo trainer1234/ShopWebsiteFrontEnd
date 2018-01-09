@@ -42,7 +42,7 @@ export class AccessitoryComponent implements OnInit {
               private sanitizer: DomSanitizer, private manufactureService: ManufactureService,
               private propertyService: PropertyService) {
 
-    this.manufactureService.getManufacture().subscribe(
+    this.manufactureService.getManufacturebyType('3').subscribe(
       data => {
         this.manufactures = data['content'];
       },
@@ -63,6 +63,7 @@ export class AccessitoryComponent implements OnInit {
     this.productService.getAllProductsByType('3', null).subscribe(
       data => {
         this.products = data['content'];
+        console.log(this.products);
         this.productsResource = new DataTableResource(this.products);
         this.productsResource.count().then(count => this.productsCount = count);
         this.updateDataTable();
@@ -268,4 +269,13 @@ export class AccessitoryComponent implements OnInit {
     this.productsResource.query(query).then(products => this.currentPageProducts = products);
   }
 
+  change(property) {
+    this.properties.forEach(
+      element => {
+        if (element.id === property.id) {
+          property.name = element.name;
+        }
+      }
+    );
+  }
 }
