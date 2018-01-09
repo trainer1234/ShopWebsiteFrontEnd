@@ -11,7 +11,7 @@ import {EmitterService} from '../../shared/services/emitter.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product: Product;
+  product: Product = new Product();
 
   constructor(private route: ActivatedRoute, private productService: ProductService) {
   }

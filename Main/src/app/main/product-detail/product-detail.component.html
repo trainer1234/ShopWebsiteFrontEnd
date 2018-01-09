@@ -6,10 +6,15 @@
     <div class="col-lg-6">
       <div>
         <h2>{{product.name}}</h2>
-        <div *ngIf="product.promotionRate > 0">
+        <div *ngIf="product?.promotionRate > 0">
           <p class="promotion-price">
             {{product.price - product.promotionRate * product.price / 100 | number}} VNĐ
-            <span class="normal-price" style="padding-left: 20px;">{{product.price | number}} VNĐ</span>
+            <span class="deprecated-price" style="padding-left: 20px;">{{product.price | number}} VNĐ</span>
+          </p>
+        </div>
+        <div *ngIf="product?.promotionRate == 0">
+          <p class="promotion-price">
+            <span class="normal-price">{{product.price | number}} VNĐ</span>
           </p>
         </div>
       </div>
@@ -20,7 +25,7 @@
         <th width="70%">Chi tiết</th>
         </thead>
         <tbody>
-        <tr *ngFor="let productProperty of product.properties">
+        <tr *ngFor="let productProperty of product?.properties">
           <td>{{productProperty.name}}</td>
           <td>{{productProperty.detail}}</td>
         </tr>

@@ -54,6 +54,8 @@ export class ProductListComponent implements OnInit {
   }
 
   refreshList(){
+    console.log(this.filterManufacture);
+    console.log(this.filterPrice);
     this.displayProducts = [];
     this.products.forEach(
       product => {
@@ -72,27 +74,23 @@ export class ProductListComponent implements OnInit {
                 flag = false;
               }
             }else if(price == '1'){
-              if(product.price < 10000000){
+              if(product.price >= 5000000 && product.price <= 7000000){
                 flag = false;
               }
             }else if(price === '2'){
-              if(product.price < 7000000){
+              if(product.price >= 7000000 && product.price <= 10000000){
                 flag = false;
               }
             }else if(price === '3'){
-              if(product.price < 1000000){
+              if(product.price >= 10000000 && product.price <= 20000000){
                 flag = false;
               }
             }else if(price === '4'){
-              if(product.price < 2000000){
+              if(product.price >= 20000000 && product.price <= 30000000){
                 flag = false;
               }
             }else if(price === '5'){
-              if(product.price < 3000000){
-                flag = false;
-              }
-            }else if(price === '6'){
-              if(product.price >= 3000000){
+              if(product.price >= 30000000){
                 flag = false;
               }
             }

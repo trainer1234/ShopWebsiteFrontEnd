@@ -10,6 +10,7 @@ import {CartComponent} from './cart/cart.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {ProductOrderSearchComponent} from './product-order-search/product-order-search.component';
 import {ProductDetailComponent} from './product-detail/product-detail.component';
+import {LaptopComponent} from './laptop/laptop.component';
 
 const routes: Routes = [
   {path: '', component: HeaderComponent, outlet: 'header'},
@@ -19,6 +20,7 @@ const routes: Routes = [
     component: HomepageComponent,
   },
   {path: 'phone', component: PhoneComponent},
+  {path: 'laptop', component: LaptopComponent},
   {path: 'tablet', component: TabletComponent},
   {path: 'accessories', component: AccessoriesComponent},
   {path: 'promotion', component: PromotionComponent},

@@ -10,10 +10,15 @@
   cursor: pointer;
 }
 
-.normal-price{
+.deprecated-price{
   text-decoration: line-through;
   color: darkgray;
   font-size: 16px;
+}
+
+.normal-price{
+  color: black;
+  font-size: 26px;
 }
 
 .promotion-price{

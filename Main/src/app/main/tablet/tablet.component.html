@@ -1,3 +1,11 @@
-<p>
-  tablet works!
-</p>
+<div class="container page-content">
+  <div class="row">
+    <div class="col-lg-2">
+      <app-filter [type]="'2'"></app-filter>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-9">
+      <app-product-list [type]="2"></app-product-list>
+    </div>
+  </div>
+</div>
