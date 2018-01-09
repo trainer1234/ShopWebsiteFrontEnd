@@ -29,15 +29,14 @@ export class ProductListComponent implements OnInit {
           } else {
             this.filterManufacture.push(token[1]);
           }
-          this.refreshList();
         } else if(token[0] === 'p'){
           if(this.filterPrice.indexOf(token[1]) !== -1){
             this.filterPrice.splice(this.filterPrice.indexOf(token[1]), 1);
           } else {
             this.filterPrice.push(token[1]);
           }
-          this.refreshList();
         }
+        this.refreshList();
       }
     );
   }
@@ -58,45 +57,43 @@ export class ProductListComponent implements OnInit {
     this.displayProducts = [];
     this.products.forEach(
       product => {
-        let flag = false;
-        console.log(this.filterManufacture);
+        let flag = true;
         this.filterManufacture.forEach(
           munufacture => {
             if(this.filterManufacture.indexOf(product.manufacture.id) !== -1){
-              flag = true;
+              flag = false;
             }
           }
         );
-        if(flag){
-          this.displayProducts.push(product);
-        }
-      }
-    );
-
-    this.products.forEach(
-      product => {
-        let flag = false;
         this.filterPrice.forEach(
           price => {
             if(price === '0'){
               if(product.price <= 5000000){
-                flag = true;
+                flag = false;
               }
             }else if(price == '1'){
               if(product.price < 10000000){
-                flag = true;
+                flag = false;
               }
             }else if(price === '2'){
-              if(product.price < 15000000){
-                flag = true;
+              if(product.price < 7000000){
+                flag = false;
               }
             }else if(price === '3'){
-              if(product.price < 2000000){
-                flag = true;
+              if(product.price < 1000000){
+                flag = false;
               }
             }else if(price === '4'){
+              if(product.price < 2000000){
+                flag = false;
+              }
+            }else if(price === '5'){
+              if(product.price < 3000000){
+                flag = false;
+              }
+            }else if(price === '6'){
               if(product.price >= 3000000){
-                flag = true;
+                flag = false;
               }
             }
           }

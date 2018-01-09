@@ -14,10 +14,16 @@ export class FilterComponent implements OnInit {
   manufactures: Manufacture[];
 
   filterEmmiter = EmitterService.get('Filter');
+  checkManufactuer: boolean[] = [];
+  checkPrice: boolean[] = [];
 
-  constructor(private manufactureService: ManufactureService) { }
+  constructor(private manufactureService: ManufactureService) {
+  }
 
   ngOnInit() {
+    this.checkManufactuer[0] = true;
+    this.checkPrice[0] = true;
+
     this.manufactureService.getManufactureByType(this.type).subscribe(
       data => {
         this.manufactures = data['content'];
@@ -28,7 +34,40 @@ export class FilterComponent implements OnInit {
     );
   }
 
-  check(token: string){
-    this.filterEmmiter.emit(token);
+  check(msg: string, index: number) {
+    // const token: string[] = msg.split('/');
+    // if (token[0] === 'm') {
+    //   if (index !== 0) {
+    //     this.checkManufactuer[0] = false;
+    //     let flag = false;
+    //     for (let i = 1; i <= this.manufactures.length; i++) {
+    //       if(!this.checkManufactuer[i]){
+    //         flag = true;
+    //         break;
+    //       }
+    //     }
+    //     if(!flag){
+    //       this.checkManufactuer[0] = true;
+    //       for (let i = 1; i <= this.manufactures.length; i++) {
+    //         this.checkManufactuer[i] = false;
+    //       }
+    //     }else {
+    //       // this.checkManufactuer[index] = !this.checkManufactuer[index];
+    //     }
+    //     console.log(this.checkManufactuer);
+    //   }
+    // } else if (token[0] === 'p') {
+    //   if (index !== 0) {
+    //     this.checkPrice[index] = !this.checkPrice[index];
+    //     let flag = false;
+    //     for (let i = 1; i < 7; i++) {
+    //       if(!this.checkPrice[i]){
+    //
+    //       }
+    //     }
+    //   }
+    // }
+
+    this.filterEmmiter.emit(msg);
   }
 }
