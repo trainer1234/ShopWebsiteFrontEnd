@@ -23,6 +23,7 @@ import { ProductOrderSearchComponent } from './product-order-search/product-orde
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 import { LaptopComponent } from './laptop/laptop.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,6 @@ import { LaptopComponent } from './laptop/laptop.component';
     ManufactureService,
     OrderService
   ],
-  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent]
+  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent, SearchResultComponent]
 })
 export class MainModule { }

@@ -7,7 +7,11 @@
       <div class="row">
         <div class="col-md-6">
           <div class="search-form">
-            <input type="text" id="search" placeholder="Tìm kiếm">
+            <input type="text" id="search" placeholder="Tìm kiếm" [(ngModel)]="searchKeyword">
+            <button class="btn btn-light" id="search-button"
+                    style="display: inline-block; margin: 0 3px 0 0; padding: 0; border: 0;" routerLink="{{'/search/' + searchKeyword}}">
+              <img style="height: 38px; background-color: white; padding: 6px;" src="./assets/images/search.png"/>
+            </button>
           </div>
         </div>
         <div class="col-md-6 text-right">
@@ -81,5 +85,4 @@
       </div>
     </div>
   </div>
-
 </header>

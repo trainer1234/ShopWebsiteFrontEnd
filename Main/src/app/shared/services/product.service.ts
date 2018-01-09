@@ -6,10 +6,12 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 export class ProductService {
   getProductByTypeUrl: string;
   getProductByIdUrl: string;
+  getSearchedProductUrl: string;
 
   constructor(private authService: AuthService, private http: HttpClient) {
     this.getProductByIdUrl = authService.apiUrl + 'product/get/';
     this.getProductByTypeUrl = authService.apiUrl + 'product/get-recent/';
+    this.getSearchedProductUrl = authService.apiUrl + 'product/search/';
   }
 
   getAllProductsByType(type: string, num: number) {
@@ -23,6 +25,11 @@ export class ProductService {
 
   getProductById(id: string) {
     const url = this.getProductByIdUrl + id;
+    return this.http.get(url);
+  }
+
+  searchProduct(keyword: string){
+    const url = this.getSearchedProductUrl + keyword;
     return this.http.get(url);
   }
 }

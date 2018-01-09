@@ -16,6 +16,8 @@ export class ProductListComponent implements OnInit {
   displayProducts: Product[] = [];
 
   filterEmitter = EmitterService.get('Filter');
+  searchEmitter = EmitterService.get('search');
+
   filterManufacture: string[] = [];
   filterPrice: string[] = [];
 
@@ -42,15 +44,32 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productService.getAllProductsByType(this.type, 5).subscribe(
-      data => {
-        this.products = data['content'];
-        this.displayProducts = this.products;
-      },
-      err => {
-        console.log(err);
+    if(this.type){
+      this.productService.getAllProductsByType(this.type, 5).subscribe(
+        data => {
+          this.products = data['content'];
+          this.displayProducts = this.products;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+    this.searchEmitter.subscribe(
+      msg => {
+        console.log(msg);
+        this.products = [];
+        this.productService.searchProduct(msg).subscribe(
+          data => {
+            this.products = data['content'];
+            this.displayProducts = this.products;
+          },
+          err => {
+            console.log(err);
+          }
+        );
       }
-    );
+    )
   }
 
   refreshList(){

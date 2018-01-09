@@ -1,19 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import {EmitterService} from '../../shared/services/emitter.service';
 import {until} from 'selenium-webdriver';
 import elementLocated = until.elementLocated;
+import {Router} from '@angular/router';
+
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewChecked {
   chosenProductNum = 0;
 
   cartEmitter = EmitterService.get('cart');
+  searchEmitter = EmitterService.get('search');
 
-  constructor() {
+  searchKeyword:string;
+
+  constructor(private router: Router) {
     this.cartEmitter.subscribe(
       msg => {
         if (msg === 'add') {
@@ -45,4 +51,15 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  ngAfterViewChecked() {
+    $('#search').keyup(function(event) {
+      if (event.keyCode === 13) {
+        $('#search-button').click();
+      }
+    });
+  }
+
+  search(){
+    this.searchEmitter.emit(this.searchKeyword);
+  }
 }

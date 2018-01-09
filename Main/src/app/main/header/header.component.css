@@ -6,21 +6,21 @@
   margin: 6px 0;
 }
 
+.search-form{
+  width: max-content;
+  background-color: #fff;
+  border-radius: .25rem;
+}
+
 .search-form > #search {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: 400px;
   padding: .375rem .75rem;
   font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  /*background-image: none;*/
-  background-clip: padding-box;;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
-  background-size: contain;
-  background-origin: content-box;;
-  background-position-x: right;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  border: 0;
+  margin-left: 2px;
+}
 
+.btn{
+  cursor: pointer;
 }

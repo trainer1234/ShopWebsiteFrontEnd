@@ -9,10 +9,9 @@
 
 .box {
   border: 2px solid gainsboro;
-  border-radius: 6px;
-  padding: 10px 12px;
+  border-radius: 8px;
+  padding: 10px 12px 40px 12px;
   margin-bottom: 20px;
-  padding-bottom: 40px;
 }
 
 .row{
