@@ -1,7 +1,17 @@
 img{
-  max-width: 100%;
+  max-width: 120px;
 }
 
 th{
   text-align: center;
+}
+
+.deprecated-price{
+  text-decoration-line: line-through;
+}
+
+.promotion-price{
+  color: red;
+  font-weight: bold;
+  font-size: 15px;
 }

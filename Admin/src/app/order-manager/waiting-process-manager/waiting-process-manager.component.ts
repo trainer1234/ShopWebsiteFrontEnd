@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Order = jasmine.Order;
+import {OrderService} from '../../shared/services/order.service';
 
 @Component({
   selector: 'app-waiting-process-manager',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WaitingProcessManagerComponent implements OnInit {
 
-  constructor() { }
+  orders: Order[] = [];
+
+  constructor(private orderService: OrderService) { }
 
   ngOnInit() {
+
   }
 
 }
