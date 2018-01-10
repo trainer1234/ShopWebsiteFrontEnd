@@ -96,7 +96,7 @@
       [header]="'Thời điểm đặt hàng'"
       [width]="'15%'">
       <ng-template #dataTableCell let-item="item">
-        {{item.orderDate | date:'dd-MM-yyyy'}}
+        {{item.orderDate | date:'dd/MM/yyyy - hh:mm:ss'}}
       </ng-template>
     </data-table-column>
     <data-table-column

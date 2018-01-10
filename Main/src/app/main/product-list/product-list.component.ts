@@ -75,49 +75,51 @@ export class ProductListComponent implements OnInit {
     console.log(this.filterManufacture);
     console.log(this.filterPrice);
     this.displayProducts = [];
-    this.products.forEach(
-      product => {
-        let flag = true;
-        this.filterManufacture.forEach(
-          munufacture => {
-            if (this.filterManufacture.indexOf(product.manufacture.id) !== -1) {
-              flag = false;
-            }
-          }
-        );
-        this.filterPrice.forEach(
-          price => {
-            if (price === '0') {
-              if (product.price <= 5000000) {
-                flag = false;
-              }
-            } else if (price == '1') {
-              if (product.price >= 5000000 && product.price <= 7000000) {
-                flag = false;
-              }
-            } else if (price === '2') {
-              if (product.price >= 7000000 && product.price <= 10000000) {
-                flag = false;
-              }
-            } else if (price === '3') {
-              if (product.price >= 10000000 && product.price <= 20000000) {
-                flag = false;
-              }
-            } else if (price === '4') {
-              if (product.price >= 20000000 && product.price <= 30000000) {
-                flag = false;
-              }
-            } else if (price === '5') {
-              if (product.price >= 30000000) {
+    if (this.products) {
+      this.products.forEach(
+        product => {
+          let flag = true;
+          this.filterManufacture.forEach(
+            munufacture => {
+              if (this.filterManufacture.indexOf(product.manufacture.id) !== -1) {
                 flag = false;
               }
             }
+          );
+          this.filterPrice.forEach(
+            price => {
+              if (price === '0') {
+                if (product.price <= 5000000) {
+                  flag = false;
+                }
+              } else if (price == '1') {
+                if (product.price >= 5000000 && product.price <= 7000000) {
+                  flag = false;
+                }
+              } else if (price === '2') {
+                if (product.price >= 7000000 && product.price <= 10000000) {
+                  flag = false;
+                }
+              } else if (price === '3') {
+                if (product.price >= 10000000 && product.price <= 20000000) {
+                  flag = false;
+                }
+              } else if (price === '4') {
+                if (product.price >= 20000000 && product.price <= 30000000) {
+                  flag = false;
+                }
+              } else if (price === '5') {
+                if (product.price >= 30000000) {
+                  flag = false;
+                }
+              }
+            }
+          );
+          if (flag) {
+            this.displayProducts.push(product);
           }
-        );
-        if (flag) {
-          this.displayProducts.push(product);
         }
-      }
-    );
+      );
+    }
   }
 }

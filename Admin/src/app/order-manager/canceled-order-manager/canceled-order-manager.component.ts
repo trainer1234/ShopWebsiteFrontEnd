@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Order} from '../../shared/models/order';
 import {DataTableResource} from 'angular-2-data-table';
 import {OrderService} from '../../shared/services/order.service';
