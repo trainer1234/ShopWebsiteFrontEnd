@@ -76,6 +76,17 @@ export class AccountManagerComponent implements OnInit {
   }
 
   finish(item: Account) {
+    switch (this.selectedAccount.role.id) {
+      case 1:
+        this.selectedAccount.role.name = 'Quản trị viên';
+        break;
+      case 2:
+        this.selectedAccount.role.name = 'Quản lý';
+        break;
+      default:
+        this.selectedAccount.role.name = 'Nhân viên';
+        break;
+    }
     if (this.isAddNewAccount) {
       this.finishAddNew(item);
     } else {

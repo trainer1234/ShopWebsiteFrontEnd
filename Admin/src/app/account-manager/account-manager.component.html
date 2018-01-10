@@ -43,14 +43,14 @@
     <data-table-column
       [header]="'Quyền hạn'"
       [width]="'25%'">
-      <!--<ng-template #dataTableCell let-item="item">-->
-        <!--<select class="field" *ngIf="item.isModify || item.isAddNew" [(ngModel)]="item.sRole.id">-->
-          <!--<option [ngValue]="'1'">Quản trị viên</option>-->
-          <!--<option [ngValue]="'2'">Quản lý</option>-->
-          <!--<option [ngValue]="'3'">Nhân viên</option>-->
-        <!--</select>-->
-        <!--<ng-container *ngIf="!item.isModify && !item.isAddNew">{{item.sRole.name}}</ng-container>-->
-      <!--</ng-template>-->
+      <ng-template #dataTableCell let-item="item">
+        <select class="field" *ngIf="item.isModify || item.isAddNew" [(ngModel)]="item.role.id">
+          <option [ngValue]="1">Quản trị viên</option>
+          <option [ngValue]="2">Quản lý</option>
+          <option [ngValue]="3">Nhân viên</option>
+        </select>
+        <ng-container *ngIf="!item.isModify && !item.isAddNew">{{item.role.name}}</ng-container>
+      </ng-template>
     </data-table-column>
     <data-table-column
       [header]="'Thao tác'"

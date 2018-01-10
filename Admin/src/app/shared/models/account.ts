@@ -2,8 +2,10 @@ export class Account {
   id: string;
   userName: string;
   password: string;
-  role: number;
-  sRole: any = {};
+  role: {
+    id: number,
+    name: string
+  };
   isModify = false;
   isAddNew = false;
 }

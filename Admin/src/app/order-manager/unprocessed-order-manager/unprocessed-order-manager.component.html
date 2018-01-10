@@ -61,10 +61,10 @@
             <tbody>
             <tr *ngFor="let product of item.products; let i = index">
               <td>{{i+1}}</td>
-              <td>{{product.name}}</td>
-              <td>{{product.price}}</td>
-              <td>{{product.productAmount}}</td>
-              <td>{{product.price * product.quantity}}</td>
+              <td>{{product.product.name}}</td>
+              <td>{{product.product.price | number}}</td>
+              <td>{{product.amount}}</td>
+              <td>{{product.product.price * product.amount | number}}</td>
             </tr>
             </tbody>
           </table>
