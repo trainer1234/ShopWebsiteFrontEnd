@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Product} from '../../shared/models/product';
 import {ProductService} from '../../shared/services/product.service';
 import {EmitterService} from '../../shared/services/emitter.service';
-import {element} from 'protractor';
 
 @Component({
   selector: 'app-product-list',
@@ -25,14 +24,14 @@ export class ProductListComponent implements OnInit {
     this.filterEmitter.subscribe(
       msg => {
         const token: string[] = msg.split('/');
-        if(token[0] === 'm'){
-          if(this.filterManufacture.indexOf(token[1]) !== -1){
+        if (token[0] === 'm') {
+          if (this.filterManufacture.indexOf(token[1]) !== -1) {
             this.filterManufacture.splice(this.filterManufacture.indexOf(token[1]), 1);
           } else {
             this.filterManufacture.push(token[1]);
           }
-        } else if(token[0] === 'p'){
-          if(this.filterPrice.indexOf(token[1]) !== -1){
+        } else if (token[0] === 'p') {
+          if (this.filterPrice.indexOf(token[1]) !== -1) {
             this.filterPrice.splice(this.filterPrice.indexOf(token[1]), 1);
           } else {
             this.filterPrice.push(token[1]);
@@ -44,7 +43,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.type){
+    if (Number(this.type) >= 0) {
       this.productService.getAllProductsByType(this.type, 5).subscribe(
         data => {
           this.products = data['content'];
@@ -69,10 +68,10 @@ export class ProductListComponent implements OnInit {
           }
         );
       }
-    )
+    );
   }
 
-  refreshList(){
+  refreshList() {
     console.log(this.filterManufacture);
     console.log(this.filterPrice);
     this.displayProducts = [];
@@ -81,41 +80,41 @@ export class ProductListComponent implements OnInit {
         let flag = true;
         this.filterManufacture.forEach(
           munufacture => {
-            if(this.filterManufacture.indexOf(product.manufacture.id) !== -1){
+            if (this.filterManufacture.indexOf(product.manufacture.id) !== -1) {
               flag = false;
             }
           }
         );
         this.filterPrice.forEach(
           price => {
-            if(price === '0'){
-              if(product.price <= 5000000){
+            if (price === '0') {
+              if (product.price <= 5000000) {
                 flag = false;
               }
-            }else if(price == '1'){
-              if(product.price >= 5000000 && product.price <= 7000000){
+            } else if (price == '1') {
+              if (product.price >= 5000000 && product.price <= 7000000) {
                 flag = false;
               }
-            }else if(price === '2'){
-              if(product.price >= 7000000 && product.price <= 10000000){
+            } else if (price === '2') {
+              if (product.price >= 7000000 && product.price <= 10000000) {
                 flag = false;
               }
-            }else if(price === '3'){
-              if(product.price >= 10000000 && product.price <= 20000000){
+            } else if (price === '3') {
+              if (product.price >= 10000000 && product.price <= 20000000) {
                 flag = false;
               }
-            }else if(price === '4'){
-              if(product.price >= 20000000 && product.price <= 30000000){
+            } else if (price === '4') {
+              if (product.price >= 20000000 && product.price <= 30000000) {
                 flag = false;
               }
-            }else if(price === '5'){
-              if(product.price >= 30000000){
+            } else if (price === '5') {
+              if (product.price >= 30000000) {
                 flag = false;
               }
             }
           }
         );
-        if(flag){
+        if (flag) {
           this.displayProducts.push(product);
         }
       }

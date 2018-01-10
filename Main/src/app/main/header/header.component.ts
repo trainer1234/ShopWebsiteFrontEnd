@@ -44,11 +44,14 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     const cart = JSON.parse(sessionStorage.getItem('cart'));
-    cart.forEach(
-      element => {
-        this.chosenProductNum += element.quantity;
-      }
-    );
+    if(cart){
+      cart.forEach(
+        element => {
+          this.chosenProductNum += element.quantity;
+        }
+      );
+    }
+
   }
 
   ngAfterViewChecked() {

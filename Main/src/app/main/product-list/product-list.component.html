@@ -1,8 +1,8 @@
 <div class="product-grid">
-  <ng-container *ngIf="displayProducts.length > 0">
+  <ng-container *ngIf="displayProducts">
     <app-product *ngFor="let product of displayProducts" [product]="product"></app-product>
   </ng-container>
-  <ng-container *ngIf="displayProducts.length === 0">
+  <ng-container *ngIf="!displayProducts">
     <p style="text-align: center;">Không có sản phẩm trong danh sách</p>
   </ng-container>
 </div>
