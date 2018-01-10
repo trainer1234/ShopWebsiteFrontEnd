@@ -31,6 +31,7 @@ import 'froala-editor/js/froala_editor.pkgd.min.js';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 import {OrderService} from './shared/services/order.service';
 import { CanceledOrderManagerComponent } from './order-manager/canceled-order-manager/canceled-order-manager.component';
+import {AccountService} from './shared/services/account.service';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { CanceledOrderManagerComponent } from './order-manager/canceled-order-ma
     ProductService,
     PropertyService,
     ManufactureService,
-    OrderService
+    OrderService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,9 @@
 export class Account {
   id: string;
-  username: string;
+  userName: string;
+  password: string;
   role: number;
+  sRole: any = {};
+  isModify = false;
+  isAddNew = false;
 }

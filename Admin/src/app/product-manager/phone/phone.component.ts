@@ -62,10 +62,12 @@ export class PhoneComponent implements OnInit {
 
     this.productService.getAllProductsByType('0', null).subscribe(
       data => {
-        this.products = data['content'];
-        this.productsResource = new DataTableResource(this.products);
-        this.productsResource.count().then(count => this.productsCount = count);
-        this.updateDataTable();
+        if (data['succeed']) {
+          this.products = data['content'];
+          this.productsResource = new DataTableResource(this.products);
+          this.productsResource.count().then(count => this.productsCount = count);
+          this.updateDataTable();
+        }
       },
       err => {
         console.log(err);

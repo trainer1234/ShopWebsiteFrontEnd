@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {ManufactureService} from '../../shared/services/manufacture.service';
 import {Manufacture} from '../../shared/models/manufacture';
@@ -62,10 +62,12 @@ export class LaptopComponent implements OnInit {
 
     this.productService.getAllProductsByType('1', null).subscribe(
       data => {
-        this.products = data['content'];
-        this.productsResource = new DataTableResource(this.products);
-        this.productsResource.count().then(count => this.productsCount = count);
-        this.updateDataTable();
+        if (data['succeed']) {
+          this.products = data['content'];
+          this.productsResource = new DataTableResource(this.products);
+          this.productsResource.count().then(count => this.productsCount = count);
+          this.updateDataTable();
+        }
       },
       err => {
         console.log(err);

@@ -12,7 +12,7 @@
       </button>
 
       <div class="navbar-header pull-left">
-        <a href="index.html" class="navbar-brand">
+        <a routerLink="/" class="navbar-brand">
           <small>
             <i class="fa fa-leaf"></i>
             eShopping
@@ -26,7 +26,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle">
               <img class="nav-user-photo" src=""/>
               <span class="user-info">
-									<small>Welcome,</small>
+									<small>Xin chào,</small>
 									{{userName}}
 								</span>
 
@@ -35,23 +35,7 @@
 
             <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
               <li>
-                <a href="#">
-                  <i class="ace-icon fa fa-cog"></i>
-                  Settings
-                </a>
-              </li>
-
-              <li>
-                <a href="profile.html">
-                  <i class="ace-icon fa fa-user"></i>
-                  Profile
-                </a>
-              </li>
-
-              <li class="divider"></li>
-
-              <li>
-                <a href="#">
+                <a (click)="logout()">
                   <i class="ace-icon fa fa-power-off"></i>
                   Logout
                 </a>
@@ -66,16 +50,9 @@
   <div class="main-container ace-save-state" id="main-container">
     <div id="sidebar" class="sidebar responsive ace-save-state">
       <ul class="nav nav-list">
-        <li routerLink="">
-          <a>
-            <i class="menu-icon fa fa-tachometer"></i>
-            <span class="menu-text"> Dashboard </span>
-          </a>
-          <b class="arrow"></b>
-        </li>
         <li>
           <a class="dropdown-toggle">
-            <i class="menu-icon fa fa-desktop"></i>
+            <i class="menu-icon fa fa-list"></i>
             <span class="menu-text">
 								Quản lý hàng hóa
 							</span>
@@ -113,7 +90,7 @@
         </li>
         <li>
           <a routerLink="/manufacture-manager">
-            <i class="menu-icon fa fa-desktop"></i>
+            <i class="menu-icon fa fa-address-card"></i>
             <span class="menu-text">
 								Quản lý hãng sản xuất
 							</span>
@@ -121,7 +98,7 @@
         </li>
         <li>
           <a routerLink="/product-property-manager">
-            <i class="menu-icon fa fa-desktop"></i>
+            <i class="menu-icon fa fa-list-alt"></i>
             <span class="menu-text">
 								Quản lý thuộc tính
 							</span>
@@ -129,7 +106,7 @@
         </li>
         <li>
           <a class="dropdown-toggle">
-            <i class="menu-icon fa fa-desktop"></i>
+            <i class="menu-icon fa fa-file-text"></i>
             <span class="menu-text">
 								Quản lý đơn hàng
 							</span>
@@ -171,9 +148,9 @@
             </li>
           </ul>
         </li>
-        <li >
-          <a routerLink="account-manager">
-            <i class="menu-icon fa fa-desktop"></i>
+        <li>
+          <a routerLink="/account-manager">
+            <i class="menu-icon fa fa-user-circle"></i>
             <span class="menu-text">
 								Quản lý tài khoản
 							</span>
