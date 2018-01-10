@@ -29,6 +29,8 @@ import {ManufactureManagerComponent} from './manufacture-manager/manufacture-man
 import {PropertyService} from './shared/services/property.service';
 import 'froala-editor/js/froala_editor.pkgd.min.js';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
+import {OrderService} from './shared/services/order.service';
+import { CanceledOrderManagerComponent } from './order-manager/canceled-order-manager/canceled-order-manager.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
     TabletComponent,
     AccessitoryComponent,
     LaptopComponent,
-    ManufactureManagerComponent
+    ManufactureManagerComponent,
+    CanceledOrderManagerComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +70,8 @@ import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
     AuthService,
     ProductService,
     PropertyService,
-    ManufactureService
+    ManufactureService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

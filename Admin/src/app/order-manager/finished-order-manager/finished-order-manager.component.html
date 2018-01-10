@@ -10,5 +10,115 @@
 </div>
 
 <div class="page-content">
+  <data-table headerTitle="Danh sách đơn hàng chờ xác nhận"
+              [items]="currentPageOrder"
+              [itemCount]="ordersCount"
+              (reload)="reload($event)"
 
+              [limit]="pageLimit"
+              [expandableRows]="true"
+              [indexColumn]="false"
+  >
+    <ng-template #dataTableExpand let-item="item">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="{{'#menu1_' + item.id}}">Thông tin khách hàng</a></li>
+        <li><a data-toggle="tab" href="{{'#menu2_' + item.id}}">Chi tiết đơn hàng</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="{{'menu1_' + item.id}}" class="tab-pane fade in active">
+          <table class="table .table-striped .table-hover .table-bordered">
+            <tbody>
+            <tr>
+              <td><b>Họ và tên</b></td>
+              <td>{{item.customer.fullName}}</td>
+            </tr>
+            <tr>
+              <td><b>Địa chỉ</b></td>
+              <td>{{item.customer.address}}</td>
+            </tr>
+            <tr>
+              <td><b>Điện thoại</b></td>
+              <td>{{item.customer.phone}}</td>
+            </tr>
+            <tr>
+              <td><b>Email</b></td>
+              <td>{{item.customer.email}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="{{'menu2_' + item.id}}" class="tab-pane fade">
+          <table class="table .table-striped .table-hover .table-bordered">
+            <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên hàng hóa</th>
+              <th>Đơn giá</th>
+              <th>Số lượng</th>
+              <th>Giá tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of item.products; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.price}}</td>
+              <td>{{product.productAmount}}</td>
+              <td>{{product.price * product.quantity}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-template>
+    <data-table-column
+      [header]="'Mã đơn hàng'"
+      [width]="'15%'">
+      <ng-template #dataTableCell let-item="item">
+        {{item.orderId}}
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Số sản phẩm'"
+      [width]="'15%'">
+      <ng-template #dataTableCell let-item="item">
+        {{item.productAmount}}
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Tổng giá tiền'"
+      [width]="'15%'">
+      <ng-template #dataTableCell let-item="item">
+        {{item.totalCost | number}}
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Thời điểm đặt hàng'"
+      [width]="'15%'">
+      <ng-template #dataTableCell let-item="item">
+        {{item.orderDate | date:'dd-MM-yyyy'}}
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Trạng thái đơn hàng'"
+      [width]="'15%'">
+      <ng-template #dataTableCell let-item="item">
+        <ng-container [ngSwitch]="item.orderStatus">
+          <p *ngSwitchCase="'0'" style="color: grey; font-weight: bold;">Chưa xác nhận</p>
+          <p *ngSwitchCase="'1'" style="color: #f0981c; font-weight: bold;">Chờ giao hàng</p>
+          <p *ngSwitchCase="'2'" style="color: blue; font-weight: bold;">Đang giao hàng</p>
+          <p *ngSwitchCase="'3'" style="color: green; font-weight: bold;">Đã hoàn thành</p>
+          <p *ngSwitchCase="'4'" style="color: red; font-weight: bold;">Đã hủy bỏ</p>
+        </ng-container>
+      </ng-template>
+    </data-table-column>
+    <data-table-column
+      [header]="'Thao tác'"
+      [width]="'25%'">
+      <ng-template #dataTableCell let-item="item">
+        <button class="btn btn-danger" data-toggle="tooltip" title="Hủy bỏ đơn hàng" (click)="reject(item)"><i
+          class="fa fa-times" aria-hidden="true"></i></button>
+      </ng-template>
+    </data-table-column>
+  </data-table>
 </div><!-- /.page-content -->

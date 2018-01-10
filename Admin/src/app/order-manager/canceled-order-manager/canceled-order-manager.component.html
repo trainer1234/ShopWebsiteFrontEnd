@@ -5,7 +5,7 @@
       <a routerLink="">Home</a>
     </li>
     <li class="active">Quản lý đơn hàng</li>
-    <li class="active">Đơn đang vận chuyển</li>
+    <li class="active">Đơn chưa xử lý</li>
   </ul><!-- /.breadcrumb -->
 </div>
 
@@ -118,8 +118,6 @@
       <ng-template #dataTableCell let-item="item">
         <button class="btn btn-success" data-toggle="tooltip" title="Xác nhận đơn hàng" (click)="confirm(item)"><i
           class="fa fa-check" aria-hidden="true"></i></button>
-        <button class="btn btn-danger" data-toggle="tooltip" title="Hủy bỏ đơn hàng" (click)="reject(item)"><i
-          class="fa fa-times" aria-hidden="true"></i></button>
       </ng-template>
     </data-table-column>
   </data-table>

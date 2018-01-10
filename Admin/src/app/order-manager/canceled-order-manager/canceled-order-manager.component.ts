@@ -4,12 +4,11 @@ import {DataTableResource} from 'angular-2-data-table';
 import {OrderService} from '../../shared/services/order.service';
 
 @Component({
-  selector: 'app-finished-order-manager',
-  templateUrl: './finished-order-manager.component.html',
-  styleUrls: ['./finished-order-manager.component.css']
+  selector: 'app-canceled-order-manager',
+  templateUrl: './canceled-order-manager.component.html',
+  styleUrls: ['./canceled-order-manager.component.css']
 })
-export class FinishedOrderManagerComponent implements OnInit {
-
+export class CanceledOrderManagerComponent implements OnInit {
   orders: Order[] = [];
   currentPageOrder: Order[] = [];
 
@@ -19,7 +18,7 @@ export class FinishedOrderManagerComponent implements OnInit {
   pageLimit = 10;
 
   constructor(private orderService: OrderService) {
-    this.orderService.getAllOrdersByType('3').subscribe(
+    this.orderService.getAllOrdersByType('4').subscribe(
       data => {
         this.orders = data['content'];
         this.ordersResource = new DataTableResource(this.orders);
@@ -47,9 +46,9 @@ export class FinishedOrderManagerComponent implements OnInit {
     this.ordersResource.query(query).then(products => this.currentPageOrder = products);
   }
 
-  reject(item: Order) {
-    if (confirm('Hủy bỏ đơn hàng ?')) {
-      item.orderStatus = 4;
+  confirm(item: Order) {
+    if (confirm('Xác nhận khôi phục đơn hàng ?')) {
+      item.orderStatus = 1;
       this.orderService.editOrder(item).subscribe(
         data => {
         },

@@ -15,5 +15,6 @@ export class Product {
   quantity?: number;
   detail: string;
   properties: Property[] = [];
+  productAmount: number;
   isModifyProduct = false;
 }

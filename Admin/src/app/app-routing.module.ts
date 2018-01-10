@@ -16,6 +16,7 @@ import {AccessitoryComponent} from './product-manager/accessitory/accessitory.co
 import {LaptopComponent} from './product-manager/laptop/laptop.component';
 import {ManufactureService} from './shared/services/manufacture.service';
 import {ManufactureManagerComponent} from './manufacture-manager/manufacture-manager.component';
+import {CanceledOrderManagerComponent} from './order-manager/canceled-order-manager/canceled-order-manager.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,10 @@ const routes: Routes = [
           {
             path: 'finished',
             component: FinishedOrderManagerComponent
+          },
+          {
+            path: 'canceled',
+            component: CanceledOrderManagerComponent
           }
         ]
       },

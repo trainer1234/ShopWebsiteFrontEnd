@@ -1,27 +1,34 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from './auth.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Order} from '../models/order';
 
 @Injectable()
 export class OrderService {
-  private getOrderUrl: string;
+  private getOrderByTypeUrl: string;
   private editOrderUrl: string;
 
   constructor(private authService: AuthService, private http: HttpClient) {
-    this.getOrderUrl = this.authService.apiUrl + 'order/get/';
+    this.getOrderByTypeUrl = this.authService.apiUrl + 'order/filter/';
     this.editOrderUrl = this.authService.apiUrl + 'order/edit/';
   }
 
   getAllOrdersByType(type: string) {
-    const url = this.getOrderUrl;
-    const params = new HttpParams().set('type', type);
+    const url = this.getOrderByTypeUrl + type;
 
-    return this.http.get(url, {
-      params: params
-    });
+    return this.http.get(url);
   }
 
-  editOrder() {
-
+  editOrder(order: Order) {
+    const url = this.editOrderUrl;
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.authService.getAccessToken()
+        }
+      )
+    };
+    return this.http.put(url, order, options);
   }
 }
