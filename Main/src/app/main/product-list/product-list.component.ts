@@ -10,6 +10,7 @@ import {EmitterService} from '../../shared/services/emitter.service';
 })
 export class ProductListComponent implements OnInit {
   @Input() type: string;
+  @Input() number: number;
 
   products: Product[] = [];
   displayProducts: Product[] = [];
@@ -44,7 +45,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     if (Number(this.type) >= 0) {
-      this.productService.getAllProductsByType(this.type, 5).subscribe(
+      this.productService.getAllProductsByType(this.type, this.number).subscribe(
         data => {
           this.products = data['content'];
           this.displayProducts = this.products;
