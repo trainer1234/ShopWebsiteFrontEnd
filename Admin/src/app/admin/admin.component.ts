@@ -9,12 +9,14 @@ import {Router} from '@angular/router';
 export class AdminComponent implements OnInit {
 
   userName: string;
+  role: number;
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
     this.userName = sessionStorage.getItem('currentUser');
+    this.role = Number(sessionStorage.getItem('role'));
   }
 
   logout() {

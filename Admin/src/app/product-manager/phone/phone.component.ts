@@ -170,6 +170,7 @@ export class PhoneComponent implements OnInit {
     if (this.uploader.queue.length > 0) {
       this.uploader.queue[0].upload();
     } else {
+      this.selectedProduct.type = 0;
       this.productService.addProduct(this.selectedProduct).subscribe(
         data => {
           item.isModifyProduct = false;

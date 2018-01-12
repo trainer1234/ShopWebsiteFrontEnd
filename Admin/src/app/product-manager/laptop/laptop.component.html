@@ -26,11 +26,11 @@
   >
     <ng-template #dataTableExpand let-item="item">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#menu1">Chi tiết sản phẩm</a></li>
-        <li><a data-toggle="tab" href="#menu2">Thông số sản phẩm</a></li>
+        <li class="active"><a data-toggle="tab" href="{{'#menu1_' + item.id}}">Chi tiết sản phẩm</a></li>
+        <li><a data-toggle="tab" href="{{'#menu2_' + item.id}}">Thông số sản phẩm</a></li>
       </ul>
       <div class="tab-content">
-        <div id="menu1" class="tab-pane fade in active">
+        <div id="{{'menu1_' + item.id}}" class="tab-pane fade in active">
           <ng-container *ngIf="!item.isModifyProduct">
             <div [froalaView]="item.detail"></div>
           </ng-container>
@@ -38,7 +38,7 @@
             <div [froalaEditor]="editorOptions" [(froalaModel)]="item.detail"></div>
           </ng-container>
         </div>
-        <div id="menu2" class="tab-pane fade">
+        <div id="{{'menu2_' + item.id}}" class="tab-pane fade">
           <table class="table table-hover">
             <thead>
             <tr>

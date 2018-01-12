@@ -26,7 +26,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent,
+        redirectTo: '/product-manager/phone',
+        pathMatch: 'full'
       },
       {
         path: 'product-manager',

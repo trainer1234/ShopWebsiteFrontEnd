@@ -50,7 +50,7 @@
   <div class="main-container ace-save-state" id="main-container">
     <div id="sidebar" class="sidebar responsive ace-save-state">
       <ul class="nav nav-list">
-        <li>
+        <li *ngIf="role && role <= 2">
           <a class="dropdown-toggle">
             <i class="menu-icon fa fa-list"></i>
             <span class="menu-text">
@@ -88,7 +88,7 @@
             </li>
           </ul>
         </li>
-        <li>
+        <li *ngIf="role && role <= 2">
           <a routerLink="/manufacture-manager">
             <i class="menu-icon fa fa-address-card"></i>
             <span class="menu-text">
@@ -96,7 +96,7 @@
 							</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="role && role <= 2">
           <a routerLink="/product-property-manager">
             <i class="menu-icon fa fa-list-alt"></i>
             <span class="menu-text">
@@ -104,7 +104,7 @@
 							</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="role">
           <a class="dropdown-toggle">
             <i class="menu-icon fa fa-file-text"></i>
             <span class="menu-text">
@@ -148,7 +148,7 @@
             </li>
           </ul>
         </li>
-        <li>
+        <li *ngIf="role && role <= 1">
           <a routerLink="/account-manager">
             <i class="menu-icon fa fa-user-circle"></i>
             <span class="menu-text">

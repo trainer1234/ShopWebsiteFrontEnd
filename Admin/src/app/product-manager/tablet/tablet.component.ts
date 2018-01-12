@@ -167,6 +167,7 @@ export class TabletComponent implements OnInit {
 
   finishAddNew(item: Product) {
     console.log(item);
+    this.selectedProduct.type = 2;
     if (this.uploader.queue.length > 0) {
       this.uploader.queue[0].upload();
     } else {

@@ -167,6 +167,7 @@ export class LaptopComponent implements OnInit {
 
   finishAddNew(item: Product) {
     console.log(item);
+    this.selectedProduct.type = 1;
     if (this.uploader.queue.length > 0) {
       this.uploader.queue[0].upload();
     } else {

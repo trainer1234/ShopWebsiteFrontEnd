@@ -60,7 +60,12 @@ export class AccountManagerComponent implements OnInit {
     }
 
     this.isAddNewAccount = true;
-    this.selectedAccount = new Account();
+    item = new Account();
+    item.role = {
+      id: 0,
+      name: 'none',
+    };
+    this.selectedAccount = item;
     this.selectedAccount.isAddNew = true;
 
     this.accounts.push(this.selectedAccount);
@@ -76,6 +81,7 @@ export class AccountManagerComponent implements OnInit {
   }
 
   finish(item: Account) {
+    console.log(item);
     switch (this.selectedAccount.role.id) {
       case 1:
         this.selectedAccount.role.name = 'Quản trị viên';
