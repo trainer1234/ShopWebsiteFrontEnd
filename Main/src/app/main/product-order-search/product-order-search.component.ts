@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../shared/services/order.service';
 import {Order} from '../../shared/models/order';
 
@@ -12,14 +12,16 @@ export class ProductOrderSearchComponent implements OnInit {
   orderCode: string;
   orderResult: Order;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService) {
+  }
 
   ngOnInit() {
   }
 
-  search(){
+  search() {
     this.orderService.getOrderByCode(this.orderCode).subscribe(
       data => {
+        console.log(data);
         this.orderResult = data['content'];
       },
       err => {

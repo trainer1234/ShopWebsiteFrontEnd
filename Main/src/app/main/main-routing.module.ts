@@ -12,6 +12,9 @@ import {ProductOrderSearchComponent} from './product-order-search/product-order-
 import {ProductDetailComponent} from './product-detail/product-detail.component';
 import {LaptopComponent} from './laptop/laptop.component';
 import {SearchResultComponent} from './search-result/search-result.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {AccountComponent} from './account/account.component';
 
 const routes: Routes = [
   {path: '', component: HeaderComponent, outlet: 'header'},
@@ -26,6 +29,9 @@ const routes: Routes = [
   {path: 'accessories', component: AccessoriesComponent},
   {path: 'promotion', component: PromotionComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'account', component: AccountComponent},
   {path: 'search/:key', component: SearchResultComponent},
   {path: 'product-order-search', component: ProductOrderSearchComponent},
   {

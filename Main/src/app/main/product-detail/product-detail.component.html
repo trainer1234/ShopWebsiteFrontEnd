@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
-      <img class="product-preview-image" src="{{product.productImageUrls[0]}}">
+      <img class="product-preview-image" src="{{product.productImageUrls[0]}}" onerror="src='./assets/images/no-image.png'">
+      <div style="text-align: center;">
+        <b style="font-size: 18px; color: black;">Đánh giá sản phẩm</b>
+        <br/>
+        <rating [(ngModel)]="userRating" [float]="true" (onLeave)="userLeaveRating()"></rating>
+      </div>
     </div>
     <div class="col-lg-6">
       <div>

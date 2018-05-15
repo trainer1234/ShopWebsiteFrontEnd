@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Product} from '../../shared/models/product';
 import {ProductService} from '../../shared/services/product.service';
-import {EmitterService} from '../../shared/services/emitter.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,6 +11,7 @@ import {EmitterService} from '../../shared/services/emitter.service';
 export class ProductDetailComponent implements OnInit {
 
   product: Product = new Product();
+  userRating: number = 0;
 
   constructor(private route: ActivatedRoute, private productService: ProductService) {
   }
@@ -32,4 +32,7 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 
+  userLeaveRating() {
+    console.log(this.userRating);
+  }
 }

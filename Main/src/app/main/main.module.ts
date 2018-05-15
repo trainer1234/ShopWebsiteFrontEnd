@@ -24,6 +24,10 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 import { LaptopComponent } from './laptop/laptop.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import {RatingModule} from 'ngx-rating';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   imports: [
@@ -34,6 +38,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
     HttpClientModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
+    RatingModule,
   ],
   providers: [
     AuthService,
@@ -41,6 +46,6 @@ import { SearchResultComponent } from './search-result/search-result.component';
     ManufactureService,
     OrderService
   ],
-  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent, SearchResultComponent]
+  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent, SearchResultComponent, LoginComponent, RegisterComponent, AccountComponent]
 })
 export class MainModule { }
