@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
-  apiUrl = 'http://localhost:61152/api/';
+  apiUrl = 'http://163.22.17.212:8888/api/';
   loginUrl = this.apiUrl + 'account/login';
 
   constructor(private http: HttpClient) {
