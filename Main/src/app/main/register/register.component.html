@@ -1,3 +1,45 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <h2 style="margin-bottom: 30px;">Đăng ký</h2>
+  <form>
+    <div class="form-group">
+      <i class="fa fa-user"></i> Tên tài khoản:
+      <input class="form-control" type="text" placeholder="Tên tài khoản" name="userName" [(ngModel)]="userName">
+    </div>
+    <div class="form-group">
+      <i class="fa fa-key"></i> Mật khẩu:
+      <input class="form-control" type="text" placeholder="Mật khẩu" name="password" [(ngModel)]="password">
+    </div>
+    <div class="form-group">
+      <i class="fa fa-key"></i> Xác nhận mật khẩu:
+      <input class="form-control" type="text" placeholder="Mật khẩu" name="password" [(ngModel)]="confirmPassword">
+    </div>
+    <div class="form-group">
+      Thu nhập của bạn
+      <div style="margin-left: 30px;">
+        <div class="form-check">
+          <p><input class="form-check-input" type="radio" name="optradio" (change)="selectedIncome = 3">Trên 15 triệu</p>
+        </div>      
+        <div class="form-check">
+          <p><input class="form-check-input" type="radio" name="optradio" (change)="selectedIncome = 2">Từ 10 - 15 triệu</p>
+        </div>
+        <div class="form-check">
+          <p><input class="form-check-input" type="radio" name="optradio" (change)="selectedIncome = 1">Từ 5 - 10 triệu</p>
+        </div>
+        <div class="form-check">
+          <p><input class="form-check-input" type="radio" name="optradio" (change)="selectedIncome = 0">Dưới 5 triệu</p>
+        </div>
+      </div>
+    </div>    
+    <div class="form-group">
+      Hãng sản phẫm ưa thích
+      <br/>
+      <div class="row" style="margin-left: 20px;">
+        <div class="form-check-inline col-xl-3 col-lg-3" *ngFor="let manufacture of manufactures; let i = index">
+          <p><input class="form-check-input" type="checkbox" (change)="selectManufacture(i)">{{manufacture.name}}</p>
+        </div>        
+      </div>
+    </div>    
+    <br/>
+    <button class="btn btn-primary" (click)="register()">Đăng ký</button>
+  </form>
+</div>

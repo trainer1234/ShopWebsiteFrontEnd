@@ -19,10 +19,22 @@
             <ul class="top_nav_menu">
 
               <!-- Currency / Language / My Account -->
-
-              <li class="account">
-                <a routerLink="/login"><i class="fa fa-user"></i>
-                    Đăng nhập</a>
+              
+              <li class="currency">
+                <ng-container *ngIf="userName">
+                  <a href="#"><i class="fa fa-user"></i>
+                                      {{userName}}
+                  </a>
+                  <ul class="currency_selection">
+                    <li><a href="#">Thông tin</a></li>
+                    <li><a href="#" (click)="logout()">Đăng xuất</a></li>                  
+                  </ul>
+                </ng-container>
+                <ng-container *ngIf="!userName">
+                  <a href="#" routerLink="/login"><i class="fa fa-user"></i>
+                                      Đăng nhập
+                  </a>
+                </ng-container>                
               </li>
             </ul>
           </div>

@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
 
   searchKeyword:string;
 
+  userName: string = '';
+
   constructor(private router: Router) {
     this.cartEmitter.subscribe(
       msg => {
@@ -43,6 +45,8 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
+    this.userName = sessionStorage.getItem('currentUser');  
+    console.log(this.userName);
     const cart = JSON.parse(sessionStorage.getItem('cart'));
     if(cart){
       cart.forEach(
@@ -64,5 +68,11 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
 
   search(){
     this.searchEmitter.emit(this.searchKeyword);
+  }
+
+  logout(){
+    sessionStorage.clear();
+    this.userName = '';
+    this.router.navigate(['/']);
   }
 }

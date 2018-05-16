@@ -28,6 +28,7 @@ import {RatingModule} from 'ngx-rating';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
+import {AccountService} from '../shared/services/account.service';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { AccountComponent } from './account/account.component';
     AuthService,
     ProductService,
     ManufactureService,
-    OrderService
+    OrderService,
+    AccountService,
   ],
   declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent, SearchResultComponent, LoginComponent, RegisterComponent, AccountComponent]
 })
