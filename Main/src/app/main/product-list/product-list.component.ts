@@ -44,7 +44,29 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (Number(this.type) >= 0) {
+    if (Number(this.type) == 5) {
+      this.productService.getTopViewProduct().subscribe(
+        data => {
+          this.products = data['content'];
+          this.displayProducts = this.products;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+    else if(Number(this.type) == 6){
+      this.productService.getTopPurchasedProduct().subscribe(
+        data => {
+          this.products = data['content'];
+          this.displayProducts = this.products;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+    else if (Number(this.type) >= 0) {
       this.productService.getAllProductsByType(this.type, this.number).subscribe(
         data => {
           this.products = data['content'];

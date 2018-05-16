@@ -7,11 +7,15 @@ export class ProductService {
   getProductByTypeUrl: string;
   getProductByIdUrl: string;
   getSearchedProductUrl: string;
+  getTopViewProductUrl: string;
+  getTopPurchasedProductUrl: string;
 
   constructor(private authService: AuthService, private http: HttpClient) {
     this.getProductByIdUrl = authService.apiUrl + 'product/get/';
     this.getProductByTypeUrl = authService.apiUrl + 'product/get-recent/';
     this.getSearchedProductUrl = authService.apiUrl + 'product/search/';
+    this.getTopViewProductUrl = authService.apiUrl + 'product/view/get/5';
+    this.getTopPurchasedProductUrl = authService.apiUrl + 'product/purchasecounter/get/5';
   }
 
   getAllProductsByType(type: string, num: number) {
@@ -21,6 +25,16 @@ export class ProductService {
     return this.http.get(url, {
       params: params
     });
+  }
+
+  getTopViewProduct(){
+    const url = this.getTopViewProductUrl;
+    return this.http.get(url);
+  }
+
+  getTopPurchasedProduct(){
+    const url = this.getTopPurchasedProductUrl;
+    return this.http.get(url);
   }
 
   getProductById(id: string) {

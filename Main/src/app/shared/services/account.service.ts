@@ -9,12 +9,14 @@ export class AccountService {
   addAccountUrl: string;
   editAccountUrl: string;
   removeAccountUrl: string;
+  getCurrentAccountUrl: string;
 
   constructor(private authService: AuthService, private http: HttpClient) {
     this.getAllAccountUrl = this.authService.apiUrl + 'account/get';
     this.addAccountUrl = this.authService.apiUrl + 'account/register';
     this.editAccountUrl = this.authService.apiUrl + 'account/edit';
     this.removeAccountUrl = this.authService.apiUrl + 'account/remove';
+    this.getCurrentAccountUrl = this.authService.apiUrl + 'account/get-current';
   }
 
   addAccount(account) {
@@ -33,5 +35,18 @@ export class AccountService {
       )
     };
     return this.http.put(url, account, options);
+  }
+
+  getCurrentUser(){
+    const url = this.getCurrentAccountUrl;
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.authService.getAccessToken()
+        }
+      )
+    };
+    return this.http.get(url, options);
   }
 }
