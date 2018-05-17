@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Product} from '../../shared/models/product';
 import {ProductService} from '../../shared/services/product.service';
+import {RatingService} from "../../shared/services/rating.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -13,7 +14,8 @@ export class ProductDetailComponent implements OnInit {
   product: Product = new Product();
   userRating: number = 0;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  constructor(private route: ActivatedRoute, private productService: ProductService,
+              private ratingService: RatingService) {
   }
 
   ngOnInit() {
@@ -23,6 +25,15 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getProductById(id).subscribe(
           data => {
             this.product = data['content'];
+            this.ratingService.getRating(this.product.id).subscribe(
+              ratingData => {
+                this.userRating = ratingData['content'].rating;
+                console.log(this.userRating);
+              },
+              ratingErr => {
+                console.log(ratingErr);
+              }
+            );
           },
           err => {
             console.log(err);
@@ -34,5 +45,13 @@ export class ProductDetailComponent implements OnInit {
 
   userLeaveRating() {
     console.log(this.userRating);
+    this.ratingService.updateRating(this.product.id, this.userRating).subscribe(
+      data => {
+
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }

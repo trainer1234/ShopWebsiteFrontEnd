@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import {AccountService} from '../shared/services/account.service';
+import {RatingService} from "../shared/services/rating.service";
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import {AccountService} from '../shared/services/account.service';
     ManufactureService,
     OrderService,
     AccountService,
+    RatingService
   ],
   declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent, SearchResultComponent, LoginComponent, RegisterComponent, AccountComponent]
 })
