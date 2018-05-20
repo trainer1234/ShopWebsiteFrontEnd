@@ -15,6 +15,7 @@ import {SearchResultComponent} from './search-result/search-result.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {AccountComponent} from './account/account.component';
+import {AuthGuard} from '../shared/auth.guard';
 
 const routes: Routes = [
   {path: '', component: HeaderComponent, outlet: 'header'},
@@ -31,7 +32,7 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'account', component: AccountComponent},
+  {path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
   {path: 'search/:key', component: SearchResultComponent},
   {path: 'product-order-search', component: ProductOrderSearchComponent},
   {

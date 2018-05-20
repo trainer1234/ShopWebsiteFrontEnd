@@ -32,12 +32,14 @@ export class AccountComponent implements OnInit {
         console.log(this.currentAccount);
         this.userName = this.currentAccount.userName;
         this.selectedIncome = this.currentAccount.income;
-        this.selectedHobbies = this.currentAccount.hobbies;        
-        for(let i = 0; i< this.manufactures.length; i++){                    
-          if(this.selectedHobbies.some(x => x.id === this.manufactures[i].id)){
-            this.selectHobbiesMark[i] = true;            
-          }          
-        }        
+        this.selectedHobbies = this.currentAccount.hobbies;     
+        if(this.selectedHobbies !== null){
+          for(let i = 0; i< this.manufactures.length; i++){                    
+            if(this.selectedHobbies.some(x => x.id === this.manufactures[i].id)){
+              this.selectHobbiesMark[i] = true;            
+            }          
+          }        
+        }           
       },
       err => {
         console.log(err);

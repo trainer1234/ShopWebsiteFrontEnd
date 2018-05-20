@@ -36,11 +36,23 @@
         </tr>
         </tbody>
       </table>
-      <button class="btn btn-block btn-danger">Mua ngay</button>
+      <button class="btn btn-block btn-primary">Thêm vào giỏ hàng</button>
     </div>
   </div>
-  <div style="margin-top: 100px; text-align: center;">
-    <h4>Thông tin chi tiết</h4>
-    <div [froalaView]="product.detail"></div>
-  </div>
+  <ng-container *ngIf="product.detail != null || product.detail != undefined">
+      <div style="margin-top: 100px; text-align: center;">
+        <h4>Thông tin chi tiết</h4>
+        <div [froalaView]="product.detail"></div>
+      </div>
+  </ng-container>  
+  <ng-container *ngIf="recommendProducts != null">
+    <div class="row" style="margin-top: 100px;">
+      <div class="col">
+        <div class="box">
+          <h4 style="margin-left: 20px; color: red;">Có thể bạn thích</h4>        
+          <app-product-list [products]="recommendProducts"></app-product-list>            
+        </div>
+      </div>
+    </div>
+  </ng-container>   
 </div>

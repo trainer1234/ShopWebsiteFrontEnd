@@ -12,9 +12,25 @@ import {EmitterService} from '../../shared/services/emitter.service';
 export class SearchResultComponent implements OnInit {
 
   keyword: string;
+  products: Product[] = undefined;
   searchEmitter = EmitterService.get('search');
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService) { 
+    this.searchEmitter.subscribe(
+      msg => {
+        console.log(msg);
+        this.products = undefined;
+        this.productService.searchProduct(msg).subscribe(
+          data => {
+            this.products = data['content'];
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      }
+    );
+  }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -23,6 +39,16 @@ export class SearchResultComponent implements OnInit {
         this.searchEmitter.emit(params['key']);
       }
     );
+    this.productService.searchProduct(this.keyword).subscribe(
+          data => {
+            this.products = data['content'];            
+            console.log(this.products);
+          },
+          err => {
+            this.products = null;
+            console.log(err);
+          }
+        );
   }
 
 }

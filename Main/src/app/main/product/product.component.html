@@ -1,7 +1,7 @@
 <div class="product-item">
   <div class="product" routerLink="{{productLink}}">
     <div class="product_image">
-      <img src="{{product.productImageUrls[0]}}" onerror="src='./assets/images/no-image.png'">
+      <img src="{{product?.productImageUrls[0]}}" onerror="src='./assets/images/no-image.png'">
     </div>
     <div class="favorite favorite_left"></div>
     <div *ngIf="product.promotionRate > 0" class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">

@@ -13,18 +13,32 @@ export class ProductDetailComponent implements OnInit {
 
   product: Product = new Product();
   userRating: number = 0;
+  recommendProducts: Product[] = null;
 
   constructor(private route: ActivatedRoute, private productService: ProductService,
               private ratingService: RatingService) {
   }
 
   ngOnInit() {
+    this.productService.getRecommendProduct().subscribe(
+      data => {
+        this.recommendProducts = data['content'];
+        console.log(this.recommendProducts);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
     this.route.params.subscribe(
       params => {
         const id = params['id'];
         this.productService.getProductById(id).subscribe(
           data => {
             this.product = data['content'];
+             if(sessionStorage.getItem("currentUser") == null){              
+              return;
+            }
             this.ratingService.getRating(this.product.id).subscribe(
               ratingData => {
                 this.userRating = ratingData['content'].rating;
@@ -44,7 +58,10 @@ export class ProductDetailComponent implements OnInit {
   }
 
   userLeaveRating() {
-    console.log(this.userRating);
+    if(sessionStorage.getItem("currentUser") == null){
+      alert("Bạn phải đăng nhập để đánh giá sản phẩm!");
+      return;
+    }
     this.ratingService.updateRating(this.product.id, this.userRating).subscribe(
       data => {
 

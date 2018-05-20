@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from './auth.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class ProductService {
@@ -9,6 +9,7 @@ export class ProductService {
   getSearchedProductUrl: string;
   getTopViewProductUrl: string;
   getTopPurchasedProductUrl: string;
+  getRecommendProductUrl: string;
 
   constructor(private authService: AuthService, private http: HttpClient) {
     this.getProductByIdUrl = authService.apiUrl + 'product/get/';
@@ -16,6 +17,7 @@ export class ProductService {
     this.getSearchedProductUrl = authService.apiUrl + 'product/search/';
     this.getTopViewProductUrl = authService.apiUrl + 'product/view/get/5';
     this.getTopPurchasedProductUrl = authService.apiUrl + 'product/purchasecounter/get/5';
+    this.getRecommendProductUrl = authService.apiUrl + 'rating/recommend';
   }
 
   getAllProductsByType(type: string, num: number) {
@@ -45,5 +47,18 @@ export class ProductService {
   searchProduct(keyword: string){
     const url = this.getSearchedProductUrl + keyword;
     return this.http.get(url);
+  }
+
+  getRecommendProduct(){
+    const url = this.getRecommendProductUrl;
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.authService.getAccessToken()
+        }
+      )
+    };
+    return this.http.get(url, options);
   }
 }

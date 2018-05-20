@@ -1,6 +1,7 @@
 <div class="container page-content">
   <h3 style="margin-bottom: 20px;">Kết quả tìm kiếm từ khóa <b>"{{keyword}}"</b></h3>
   <div class="box">
-    <app-product-list></app-product-list>
+    <app-product-list *ngIf="products != null" [products]="products"></app-product-list>
+    <h3 *ngIf="products === null" style="text-align: center;">Không có kết quả</h3>
   </div>
 </div>

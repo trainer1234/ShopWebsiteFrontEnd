@@ -63,7 +63,7 @@ import {AccountService} from './shared/services/account.service';
     DataTableModule,
     FileUploadModule,
     FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
   ],
   providers: [
     FormBuilder,

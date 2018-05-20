@@ -12,7 +12,7 @@ export class ProductListComponent implements OnInit {
   @Input() type: string;
   @Input() number: number;
 
-  products: Product[] = [];
+  @Input() products: Product[];
   displayProducts: Product[] = [];
 
   filterEmitter = EmitterService.get('Filter');
@@ -41,9 +41,16 @@ export class ProductListComponent implements OnInit {
         this.refreshList();
       }
     );
+    
+    console.log(this.products);
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    if(this.products != null){
+      this.displayProducts = this.products;      
+      return;
+    }
+    this.products = [];
     if (Number(this.type) == 5) {
       this.productService.getTopViewProduct().subscribe(
         data => {
@@ -76,22 +83,7 @@ export class ProductListComponent implements OnInit {
           console.log(err);
         }
       );
-    }
-    this.searchEmitter.subscribe(
-      msg => {
-        console.log(msg);
-        this.products = [];
-        this.productService.searchProduct(msg).subscribe(
-          data => {
-            this.products = data['content'];
-            this.displayProducts = this.products;
-          },
-          err => {
-            console.log(err);
-          }
-        );
-      }
-    );
+    }    
   }
 
   refreshList() {
