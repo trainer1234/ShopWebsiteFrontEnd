@@ -36,7 +36,7 @@
         </tr>
         </tbody>
       </table>
-      <button class="btn btn-block btn-primary">Thêm vào giỏ hàng</button>
+      <button class="btn btn-block btn-primary" (click)="chooseProduct()">Thêm vào giỏ hàng</button>
     </div>
   </div>
   <ng-container *ngIf="product.detail != null || product.detail != undefined">

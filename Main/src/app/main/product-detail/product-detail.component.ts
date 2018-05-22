@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Product} from '../../shared/models/product';
 import {ProductService} from '../../shared/services/product.service';
 import {RatingService} from "../../shared/services/rating.service";
+import {EmitterService} from '../../shared/services/emitter.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,6 +11,8 @@ import {RatingService} from "../../shared/services/rating.service";
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
+
+  cartEmitter = EmitterService.get('cart');
 
   product: Product = new Product();
   userRating: number = 0;
@@ -55,6 +58,28 @@ export class ProductDetailComponent implements OnInit {
         );
       }
     );
+  }
+
+  chooseProduct() {
+    this.cartEmitter.emit('add');
+    let isProductExist = false;
+    let cart: Product[] = JSON.parse(sessionStorage.getItem('cart'));
+    if (!cart) {
+      cart = [];
+    } else {
+      cart.forEach(
+        element => {
+          if (element.id === this.product.id) {
+            isProductExist = true;
+            element.quantity++;
+          }
+        }
+      );
+    }
+    if (!isProductExist) {
+      cart.push(this.product);
+    }
+    sessionStorage.setItem('cart', JSON.stringify(cart));
   }
 
   userLeaveRating() {

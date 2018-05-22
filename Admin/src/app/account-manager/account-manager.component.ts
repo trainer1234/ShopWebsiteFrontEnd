@@ -89,8 +89,11 @@ export class AccountManagerComponent implements OnInit {
       case 2:
         this.selectedAccount.role.name = 'Quản lý';
         break;
-      default:
+      case 3:
         this.selectedAccount.role.name = 'Nhân viên';
+        break;
+      default:
+        this.selectedAccount.role.name = 'Khách hàng';
         break;
     }
     if (this.isAddNewAccount) {

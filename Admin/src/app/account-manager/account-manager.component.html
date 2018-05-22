@@ -14,7 +14,7 @@
     aria-hidden="true"></i>
   </button>
 
-  <data-table headerTitle="Danh sách điện thoại"
+  <data-table headerTitle="Danh sách tài khoản"
               [items]="currentPageAccounts"
               [itemCount]="accountCount"
               (reload)="reload($event)"
@@ -48,6 +48,7 @@
           <option [ngValue]="1">Quản trị viên</option>
           <option [ngValue]="2">Quản lý</option>
           <option [ngValue]="3">Nhân viên</option>
+          <option [ngValue]="4">Khách hàng</option>
         </select>
         <ng-container *ngIf="!item.isModify && !item.isAddNew">{{item.role.name}}</ng-container>
       </ng-template>
