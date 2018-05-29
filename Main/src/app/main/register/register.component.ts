@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Manufacture} from '../../shared/models/manufacture';
 import {ManufactureService} from '../../shared/services/manufacture.service';
 import {AccountService} from '../../shared/services/account.service';
+import {AuthService} from '../../shared/services/auth.service';
 import {Account} from '../../shared/models/account'
 import {Router} from '@angular/router';
 
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   public manufactures: Manufacture[] = [];  
 
   constructor(public manufactureService: ManufactureService, private accountService: AccountService,
-    private router: Router) {
+    private authService: AuthService, private router: Router) {
 
    }
 
@@ -57,10 +58,18 @@ export class RegisterComponent implements OnInit {
     this.accountService.addAccount(newAccount).subscribe(
       data => {
         alert('Đăng ký thành công!');
-        sessionStorage.setItem('currentUser', this.userName);
-        sessionStorage.setItem('accessToken', data['accessToken']);
-        sessionStorage.setItem('role', data['role']);
-        this.router.navigate(['/']);
+        this.authService.login(newAccount.userName, newAccount.password).subscribe(
+          loginData => {
+            sessionStorage.setItem('currentUser', this.userName);
+            sessionStorage.setItem('accessToken', loginData['accessToken']);
+            sessionStorage.setItem('role', loginData['role']);
+            window.location.reload();
+            this.router.navigate(['/']);
+          },
+          loginErr => {
+            console.log(loginErr);
+          }
+        );       
       },
       err =>{
         console.log(err);
