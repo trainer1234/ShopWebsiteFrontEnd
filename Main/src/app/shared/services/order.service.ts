@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {AuthService} from './auth.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Order} from '../models/order';
+import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Order } from '../models/order';
 
 @Injectable()
 export class OrderService {
@@ -24,12 +24,12 @@ export class OrderService {
     });
   }
 
-  addOrder(order){
+  addOrder(order) {
     const url = this.addOrderUrl;
     return this.http.post(url, order);
   }
 
-  getOrderByCode(code: string){
+  getOrderByCode(code: string) {
     const url = this.getOrderByCodeUrl + code;
     return this.http.get(url);
   }

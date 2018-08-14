@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {AuthService} from './auth.service';
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class ProductService {
@@ -29,12 +29,12 @@ export class ProductService {
     });
   }
 
-  getTopViewProduct(){
+  getTopViewProduct() {
     const url = this.getTopViewProductUrl;
     return this.http.get(url);
   }
 
-  getTopPurchasedProduct(){
+  getTopPurchasedProduct() {
     const url = this.getTopPurchasedProductUrl;
     return this.http.get(url);
   }
@@ -44,12 +44,12 @@ export class ProductService {
     return this.http.get(url);
   }
 
-  searchProduct(keyword: string){
+  searchProduct(keyword: string) {
     const url = this.getSearchedProductUrl + keyword;
     return this.http.get(url);
   }
 
-  getRecommendProduct(){
+  getRecommendProduct() {
     const url = this.getRecommendProductUrl;
     const options = {
       headers: new HttpHeaders(

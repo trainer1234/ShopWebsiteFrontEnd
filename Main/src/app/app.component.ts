@@ -7,14 +7,14 @@ import {Router} from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   searchEmitter = EmitterService.get('search');
   title = 'app';
-
+  name = '@ngx-share/buttons';
   constructor(private router: Router) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.searchEmitter.subscribe(
       msg => {
         this.router.navigate(['/search/' + msg]);

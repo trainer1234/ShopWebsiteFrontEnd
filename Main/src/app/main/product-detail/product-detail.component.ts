@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Product} from '../../shared/models/product';
-import {ProductService} from '../../shared/services/product.service';
-import {RatingService} from "../../shared/services/rating.service";
-import {EmitterService} from '../../shared/services/emitter.service';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../shared/models/product';
+import { ProductService } from '../../shared/services/product.service';
+import { RatingService } from '../../shared/services/rating.service';
+import { EmitterService } from '../../shared/services/emitter.service';
+
+import {ShareButtons} from '@ngx-share/core';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,15 +13,14 @@ import {EmitterService} from '../../shared/services/emitter.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-
   cartEmitter = EmitterService.get('cart');
 
   product: Product = new Product();
+  // tslint:disable-next-line:no-inferrable-types
   userRating: number = 0;
   recommendProducts: Product[] = null;
-
   constructor(private route: ActivatedRoute, private productService: ProductService,
-              private ratingService: RatingService) {
+    private ratingService: RatingService, public share: ShareButtons) {
   }
 
   ngOnInit() {
@@ -39,7 +40,7 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getProductById(id).subscribe(
           data => {
             this.product = data['content'];
-             if(sessionStorage.getItem("currentUser") == null){              
+            if (sessionStorage.getItem('currentUser') == null) {
               return;
             }
             this.ratingService.getRating(this.product.id).subscribe(
@@ -83,8 +84,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   userLeaveRating() {
-    if(sessionStorage.getItem("currentUser") == null){
-      alert("Bạn phải đăng nhập để đánh giá sản phẩm!");
+    if (sessionStorage.getItem('currentUser') == null) {
+      alert('Bạn phải đăng nhập để đánh giá sản phẩm!');
       return;
     }
     this.ratingService.updateRating(this.product.id, this.userRating).subscribe(

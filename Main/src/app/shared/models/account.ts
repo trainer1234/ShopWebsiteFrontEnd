@@ -1,4 +1,4 @@
-import {Manufacture} from '../../shared/models/manufacture'
+import {Manufacture} from '../../shared/models/manufacture';
 
 export class Account {
   id: string;

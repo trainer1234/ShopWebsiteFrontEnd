@@ -5,14 +5,15 @@ import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './shared/auth.guard';
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
