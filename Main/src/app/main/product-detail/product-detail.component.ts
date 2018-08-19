@@ -36,8 +36,10 @@ export class ProductDetailComponent implements OnInit {
 
     this.route.params.subscribe(
       params => {
-        const id = params['id'];
-        this.productService.getProductById(id).subscribe(
+        const id = params['id'].split('-');
+        const index = id[id.length - 1];
+        console.log(id);
+        this.productService.getProductById(index).subscribe(
           data => {
             this.product = data['content'];
             if (sessionStorage.getItem('currentUser') == null) {
