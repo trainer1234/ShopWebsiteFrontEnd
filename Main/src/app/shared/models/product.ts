@@ -16,4 +16,6 @@ export class Product {
   detail: string;
   properties: Property[] = [];
   isModifyProduct = false;
+  alias: string;
+  index: number;
 }

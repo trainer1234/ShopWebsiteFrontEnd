@@ -41,13 +41,11 @@ export class ProductListComponent implements OnInit {
         this.refreshList();
       }
     );
-    
-    console.log(this.products);
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     if(this.products != null){
-      this.displayProducts = this.products;      
+      this.displayProducts = this.products;
       return;
     }
     this.products = [];
@@ -56,6 +54,7 @@ export class ProductListComponent implements OnInit {
         data => {
           this.products = data['content'];
           this.displayProducts = this.products;
+          console.log(this.products);
         },
         err => {
           console.log(err);
@@ -83,7 +82,7 @@ export class ProductListComponent implements OnInit {
           console.log(err);
         }
       );
-    }    
+    }
   }
 
   refreshList() {

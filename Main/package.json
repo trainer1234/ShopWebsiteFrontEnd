@@ -36,7 +36,8 @@
     "jw-angular-social-buttons": "0.0.1",
     "ngx-rating": "0.0.9",
     "ngx-sharebuttons": "^4.1.4",
-    "rxjs": "^5.5.11",
+    "rxjs": "6.1.0",
+    "rxjs-compat": "6.1.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

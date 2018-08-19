@@ -19,7 +19,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.product.quantity = 1;
-    this.productLink = '/' + this.product.id;
+    this.productLink = '/' + this.product.alias ;
   }
 
   chooseProduct() {
