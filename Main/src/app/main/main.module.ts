@@ -30,8 +30,8 @@ import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import { AccountService } from '../shared/services/account.service';
 import { RatingService } from '../shared/services/rating.service';
-// Share Button Package
 import { ShareButtonModule } from '@ngx-share/button';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -54,6 +54,6 @@ import { ShareButtonModule } from '@ngx-share/button';
     RatingService
   ],
   // tslint:disable-next-line:max-line-length
-  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent, SearchResultComponent, LoginComponent, RegisterComponent, AccountComponent]
+  declarations: [HomepageComponent, HeaderComponent, FooterComponent, PhoneComponent, TabletComponent, AccessoriesComponent, PromotionComponent, CartComponent, ProductComponent, ProductListComponent, FilterComponent, ProductOrderSearchComponent, ProductDetailComponent, LaptopComponent, SearchResultComponent, LoginComponent, RegisterComponent, AccountComponent,]
 })
 export class MainModule { }
