@@ -16,6 +16,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {AccountComponent} from './account/account.component';
 import {AuthGuard} from '../shared/auth.guard';
+import {BaoKimComponent} from "../bao-kim/bao-kim/bao-kim.component";
 
 const routes: Routes = [
   {path: '', component: HeaderComponent, outlet: 'header'},
