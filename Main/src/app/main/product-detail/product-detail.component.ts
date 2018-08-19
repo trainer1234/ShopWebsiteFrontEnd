@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Product } from '../../shared/models/product';
 import { ProductService } from '../../shared/services/product.service';
 import { RatingService } from '../../shared/services/rating.service';
@@ -20,7 +21,7 @@ export class ProductDetailComponent implements OnInit {
   userRating: number = 0;
   recommendProducts: Product[] = null;
   constructor(private route: ActivatedRoute, private productService: ProductService,
-    private ratingService: RatingService, public share: ShareButtons) {
+    private ratingService: RatingService, private titleService: Title, public share: ShareButtons) {
   }
 
   ngOnInit() {
@@ -42,6 +43,7 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getProductById(index).subscribe(
           data => {
             this.product = data['content'];
+            this.titleService.setTitle(this.product.name)
             if (sessionStorage.getItem('currentUser') == null) {
               return;
             }
