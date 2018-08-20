@@ -1,11 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../shared/models/product';
 import { ProductService } from '../../shared/services/product.service';
 import { RatingService } from '../../shared/services/rating.service';
 import { EmitterService } from '../../shared/services/emitter.service';
-
-import {ShareButtons} from '@ngx-share/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,8 +18,9 @@ export class ProductDetailComponent implements OnInit {
   // tslint:disable-next-line:no-inferrable-types
   userRating: number = 0;
   recommendProducts: Product[] = null;
+
   constructor(private route: ActivatedRoute, private productService: ProductService,
-    private ratingService: RatingService, public share: ShareButtons) {
+    private ratingService: RatingService, private title: Title) {
   }
 
   ngOnInit() {
@@ -42,6 +42,7 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getProductById(index).subscribe(
           data => {
             this.product = data['content'];
+            this.title.setTitle(this.product.name);
             if (sessionStorage.getItem('currentUser') == null) {
               return;
             }

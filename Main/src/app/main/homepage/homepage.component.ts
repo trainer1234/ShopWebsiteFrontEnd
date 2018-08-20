@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {EmitterService} from '../../shared/services/emitter.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { EmitterService } from '../../shared/services/emitter.service';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-homepage',
@@ -9,7 +10,8 @@ import {Router} from '@angular/router';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() {
+  constructor(private title: Title) {
+    this.title.setTitle('Shopapp Online');
   }
 
   ngOnInit() {

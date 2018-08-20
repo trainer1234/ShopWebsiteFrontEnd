@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Product} from '../../shared/models/product';
-import {ProductService} from '../../shared/services/product.service';
-import {EmitterService} from '../../shared/services/emitter.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../../shared/models/product';
+import { ProductService } from '../../shared/services/product.service';
+import { EmitterService } from '../../shared/services/emitter.service';
 
 @Component({
   selector: 'app-product-list',
@@ -44,12 +44,12 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.products != null){
+    if (this.products != null) {
       this.displayProducts = this.products;
       return;
     }
     this.products = [];
-    if (Number(this.type) == 5) {
+    if (Number(this.type) === 5) {
       this.productService.getTopViewProduct().subscribe(
         data => {
           this.products = data['content'];
@@ -61,7 +61,8 @@ export class ProductListComponent implements OnInit {
         }
       );
     }
-    else if(Number(this.type) == 6){
+    // tslint:disable-next-line:one-line
+    else if (Number(this.type) === 6) {
       this.productService.getTopPurchasedProduct().subscribe(
         data => {
           this.products = data['content'];
@@ -72,6 +73,7 @@ export class ProductListComponent implements OnInit {
         }
       );
     }
+    // tslint:disable-next-line:one-line
     else if (Number(this.type) >= 0) {
       this.productService.getAllProductsByType(this.type, this.number).subscribe(
         data => {
@@ -106,7 +108,7 @@ export class ProductListComponent implements OnInit {
                 if (product.price <= 5000000) {
                   flag = false;
                 }
-              } else if (price == '1') {
+              } else if (price === '1') {
                 if (product.price >= 5000000 && product.price <= 7000000) {
                   flag = false;
                 }
