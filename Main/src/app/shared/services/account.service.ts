@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {AuthService} from './auth.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class AccountService {
@@ -37,7 +37,7 @@ export class AccountService {
     return this.http.put(url, account, options);
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     const url = this.getCurrentAccountUrl;
     const options = {
       headers: new HttpHeaders(

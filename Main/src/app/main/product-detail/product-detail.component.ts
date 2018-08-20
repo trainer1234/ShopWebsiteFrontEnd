@@ -20,7 +20,7 @@ export class ProductDetailComponent implements OnInit {
   recommendProducts: Product[] = null;
 
   constructor(private route: ActivatedRoute, private productService: ProductService,
-    private ratingService: RatingService, private title: Title) {
+    private ratingService: RatingService, private titleService: Title) {
   }
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getProductById(index).subscribe(
           data => {
             this.product = data['content'];
-            this.title.setTitle(this.product.name);
+            this.titleService.setTitle(this.product.name);
             if (sessionStorage.getItem('currentUser') == null) {
               return;
             }
