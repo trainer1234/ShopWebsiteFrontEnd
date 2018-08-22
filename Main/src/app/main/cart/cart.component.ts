@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   orderId: string;
   customer: Customer = new Customer();
   cartEmitter = EmitterService.get('cart');
+  paymentMethod = 0;
 
   constructor(private orderService: OrderService) {
     this.cartItems = JSON.parse(sessionStorage.getItem('cart'));
@@ -52,6 +53,7 @@ export class CartComponent implements OnInit {
   }
 
   submitOrder() {
+    console.log(this.paymentMethod)
     let products = [];
     this.cartItems.forEach(
       element => {
@@ -65,14 +67,22 @@ export class CartComponent implements OnInit {
     );
     let order = {
       customer: this.customer,
-      products: products
+      products: products,
+      paymentMethod: this.paymentMethod,
     };
     console.log(order);
     this.orderService.addOrder(order).subscribe(
       data => {
-        this.orderId = data['content'];
         this.cartItems = null;
         sessionStorage.setItem('cart', null);
+        console.log(data['content']);
+        if(this.paymentMethod == 0){
+          this.orderId = data['content'].orderId;
+        }
+        else {
+          const redirectUrl = data['content'].paypal_redirect;
+          window.location.href = redirectUrl;
+        }
       },
       err => {
         console.log(err);

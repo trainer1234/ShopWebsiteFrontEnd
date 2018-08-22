@@ -55,3 +55,29 @@
     </div>
   </div>
 </div>
+
+<button id="finishOrderButton" type="button" class="btn btn-primary btn-block"
+        data-dismiss="modal" data-toggle="modal"
+        data-target="#finishOrder" style="visibility: hidden;">Xác nhận
+</button>
+
+<div id="finishOrder" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Đặt hàng thành công</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 30px 20px; font-size: 16px; text-align: center;">
+        Chúc mừng bạn đã đặt hàng thành công. Shop sẽ liên hệ để xác nhận với bạn trong thời gian sớm nhất.<br/>
+        Bạn có thể theo dõi tình trạng vận chuyển đơn hàng của bạn dựa vào mã đơn hàng.<br/>
+        Mã đơn hàng của bạn là: <b>{{orderId}}</b><br/>
+        <button class="btn btn-outline-danger" data-dismiss="modal" routerLink="/product-order-search">Xem thông tin đơn hàng</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
