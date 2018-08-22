@@ -89,6 +89,7 @@
         </ng-container>
         <ng-container *ngIf="paymentMethod !== 0">
           <button type="button" class="btn btn-primary btn-block"
+                  [disabled]="!customer.fullname || !customer.address || !customer.email || !customer.phone"
                   (click)="submitOrder()">Xác nhận
           </button>
         </ng-container>
