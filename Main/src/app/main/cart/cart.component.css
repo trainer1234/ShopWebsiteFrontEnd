@@ -41,3 +41,12 @@ button{
 .modal-dialog{
   max-width: 800px;
 }
+
+.radio-icon{
+  width: 80px;
+}
+
+.radio label{
+  font-weight: normal;
+}
+

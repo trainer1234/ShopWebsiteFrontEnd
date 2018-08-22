@@ -47,17 +47,51 @@
       </div>
       <div class="modal-body">
         <label>Họ và tên: </label>
-        <input class="form-control field" type="text" [(ngModel)]="customer.fullname">
+        <input name="fullName" class="form-control field" type="text" [(ngModel)]="customer.fullname" required>
         <label>Địa chỉ nhận hàng: </label>
-        <input class="form-control field" type="text" [(ngModel)]="customer.address">
+        <input name="address" class="form-control field" type="text" [(ngModel)]="customer.address" required>
         <label>Email: </label>
-        <input class="form-control field" type="text" [(ngModel)]="customer.email">
+        <input name="email" class="form-control field" type="text" [(ngModel)]="customer.email" required>
         <label>Điện thoại: </label>
-        <input class="form-control field" type="text" [(ngModel)]="customer.phone">
+        <input name="phone" class="form-control field" type="text" [(ngModel)]="customer.phone" required>
+        <label>Phương thức thanh toán: </label><br/>
+        <div class="radio">
+          <label><input name="options" ng-control="options" type="radio" [value]="0"  [(ngModel)]="paymentMethod">
+            Thanh toán khi giao hàng
+          </label>
+        </div>
+        <div class="radio">
+          <label><input name="options" ng-control="options" type="radio" [value]="1"  [(ngModel)]="paymentMethod">
+            <img class="radio-icon" src="https://cdn.iconscout.com/public/images/icon/free/png-512/paypal-payment-method-gateway-logo-377175cca6c87cb6-512x512.png">
+          </label>
+        </div>
+        <div class="radio disabled">
+          <label><input name="options" ng-control="options" type="radio" [value]="2"  [(ngModel)]="paymentMethod">
+            <img class="radio-icon" src="https://static.ybox.vn/2016/03/05/baokim.jpg">
+          </label>
+        </div>
+        <br/>
+        <!---->
+        <!--<select class="form-control field" [(ngModel)]="paymentMethod">-->
+          <!--<option value="0"><img src="https://cdn.iconscout.com/public/images/icon/free/png-512/paypal-payment-method-gateway-logo-377175cca6c87cb6-512x512.png">-->
+            <!--Thanh toán khi giao hàng</option>-->
+          <!--<option value="1">Paypal</option>-->
+          <!--<option value="2">Bảo kim</option>-->
+        <!--</select>-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" data-toggle="modal" data-target="#finishOrder" (click)="submitOrder()">Xác nhận
-        </button>
+        <ng-container *ngIf="paymentMethod === 0">
+          <button type="button" class="btn btn-primary btn-block"
+                  data-dismiss="modal" data-toggle="modal"
+                  data-target="#finishOrder" (click)="submitOrder()"
+                  [disabled]="!customer.fullname || !customer.address || !customer.email || !customer.phone">Xác nhận
+          </button>
+        </ng-container>
+        <ng-container *ngIf="paymentMethod !== 0">
+          <button type="button" class="btn btn-primary btn-block"
+                  (click)="submitOrder()">Xác nhận
+          </button>
+        </ng-container>
       </div>
     </div>
 
