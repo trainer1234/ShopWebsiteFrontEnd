@@ -10,7 +10,7 @@
 
     <div *ngIf="orderResult" class="box">
       <h4><b>Thông tin khách hàng</b></h4>
-      <p><b>Họ và tên:</b> {{orderResult.customer.fullname}}</p>
+      <p><b>Họ và tên:</b> {{orderResult.customer.fullName}}</p>
       <p><b>Địa chỉ:</b> {{orderResult.customer.address}}</p>
       <p><b>Số điện thoại:</b> {{orderResult.customer.phone}}</p>
       <p><b>Email:</b> {{orderResult.customer.email}}</p>
@@ -27,8 +27,15 @@
           <span *ngSwitchCase="'4'" style="color: red; font-weight: bold;">Đã hủy bỏ</span>
         </ng-container>
       </p>
-      <p><b>Thời gian đặt hàng:</b> {{orderResult.orderDate | date:'dd/MM/yyyy - hh:mm:ss'}}</p>
-      <p><b>Tổng giá tiền:</b> {{orderResult.totalCost | number}}</p>
+      <p><b>Phương thức thanh toán: </b>
+        <ng-container [ngSwitch]="orderResult.paymentMethod">
+          <ng-container *ngSwitchCase="0">Thanh toán tại nhà</ng-container>
+          <ng-container *ngSwitchCase="1">Paypal</ng-container>
+          <ng-container *ngSwitchCase="2">Bảo kim</ng-container>
+        </ng-container>
+      </p>
+      <p><b>Thời gian đặt hàng: </b> {{orderResult.orderDate | date:'dd/MM/yyyy - hh:mm:ss'}}</p>
+      <p><b>Tổng giá tiền: </b> {{orderResult.totalCost | number}}</p>
       <br/>
 
       <h4><b>Chi tiết đơn hàng</b></h4>
@@ -81,3 +88,4 @@
   </div>
 </div>
 
+<loading-indicator *ngIf="showLoadingIndicator"></loading-indicator>
