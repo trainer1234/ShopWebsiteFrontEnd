@@ -13,6 +13,7 @@ export class ProductOrderSearchComponent implements OnInit {
   orderCode: string;
   orderResult: Order;
   orderId: string;
+  showLoadingIndicator = false;
 
   constructor(private orderService: OrderService, private route: ActivatedRoute) {
   }
@@ -20,16 +21,21 @@ export class ProductOrderSearchComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(
       params => {
-        this.orderService.finishPayment(params['paymentId'], params['PayerID']).subscribe(
-          data => {
-            this.orderId = data['content'];
-            document.getElementById("finishOrderButton").click();
-            console.log(data['content']);
-          },
-          err => {
-            console.log(err);
-          }
-        )
+        if(params['paymentId']){
+          this.showLoadingIndicator = true;
+          this.orderService.finishPayment(params['paymentId'], params['PayerID']).subscribe(
+            data => {
+              this.showLoadingIndicator = false;
+              this.orderId = data['content'];
+              document.getElementById("finishOrderButton").click();
+              console.log(data['content']);
+            },
+            err => {
+              this.showLoadingIndicator = false;
+              console.log(err);
+            }
+          )
+        }
       }
     )
   }

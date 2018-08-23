@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   customer: Customer = new Customer();
   cartEmitter = EmitterService.get('cart');
   paymentMethod = 0;
+  showLoadingIndicator = false;
 
   constructor(private orderService: OrderService) {
     this.cartItems = JSON.parse(sessionStorage.getItem('cart'));
@@ -71,6 +72,7 @@ export class CartComponent implements OnInit {
       paymentMethod: this.paymentMethod,
     };
     console.log(order);
+    this.showLoadingIndicator = true;
     this.orderService.addOrder(order).subscribe(
       data => {
         this.cartItems = null;
@@ -78,6 +80,7 @@ export class CartComponent implements OnInit {
         console.log(data['content']);
         if(this.paymentMethod == 0){
           this.orderId = data['content'].orderId;
+          this.showLoadingIndicator = false;
         }
         else {
           const redirectUrl = data['content'].paypal_redirect;
@@ -86,6 +89,7 @@ export class CartComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.showLoadingIndicator = false;
       }
     );
   }

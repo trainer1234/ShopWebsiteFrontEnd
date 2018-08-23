@@ -11,4 +11,5 @@ export class Order {
   orderStatus: number;
   customer: Customer;
   products: OrderProduct[];
+  paymentMethod: number;
 }
