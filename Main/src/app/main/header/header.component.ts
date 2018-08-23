@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
           );
         } else if(msg === 'clear'){
           this.chosenProductNum = 0;
+          sessionStorage.clear();
         } else{
           const token: string[] = msg.split('/');
           this.chosenProductNum = Number(token[1]);
@@ -45,7 +46,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.userName = sessionStorage.getItem('currentUser');  
+    this.userName = sessionStorage.getItem('currentUser');
     console.log(this.userName);
     const cart = JSON.parse(sessionStorage.getItem('cart'));
     if(cart){

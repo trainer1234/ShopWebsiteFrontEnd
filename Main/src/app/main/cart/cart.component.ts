@@ -54,7 +54,8 @@ export class CartComponent implements OnInit {
   }
 
   submitOrder() {
-    console.log(this.paymentMethod)
+    console.log(this.paymentMethod);
+    this.cartEmitter.emit('clear');
     let products = [];
     this.cartItems.forEach(
       element => {
