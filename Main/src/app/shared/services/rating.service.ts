@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from "./auth.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AuthService} from './auth.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class RatingService {

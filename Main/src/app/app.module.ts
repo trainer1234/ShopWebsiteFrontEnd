@@ -11,7 +11,7 @@ import {AuthGuard} from './shared/auth.guard';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'Main'}),
     RouterModule,
     AppRoutingModule
   ],

@@ -1,11 +1,11 @@
-import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../shared/models/product';
 import { ProductService } from '../../shared/services/product.service';
 import { RatingService } from '../../shared/services/rating.service';
 import { EmitterService } from '../../shared/services/emitter.service';
-
-import {ShareButtons} from '@ngx-share/core';
+import { Title } from '@angular/platform-browser';
+import { SeoService } from '../../shared/services/seo.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,8 +19,9 @@ export class ProductDetailComponent implements OnInit {
   // tslint:disable-next-line:no-inferrable-types
   userRating: number = 0;
   recommendProducts: Product[] = null;
+
   constructor(private route: ActivatedRoute, private productService: ProductService,
-    private ratingService: RatingService, public share: ShareButtons) {
+    private ratingService: RatingService, private titleService: Title, private seoService: SeoService, private routeService: Router) {
   }
 
   ngOnInit() {
@@ -38,10 +39,21 @@ export class ProductDetailComponent implements OnInit {
       params => {
         const id = params['id'].split('-');
         const index = id[id.length - 1];
+        const strUrl = this.routeService.url.split('/');
+        const strSlug = strUrl[strUrl.length - 1];
         console.log(id);
         this.productService.getProductById(index).subscribe(
           data => {
             this.product = data['content'];
+            this.titleService.setTitle(this.product.name);
+            this.seoService.generateTags({
+              type: 'product',
+              title: 'Mua ' + this.product.name + 'với giá ' + this.product.price,
+              // tslint:disable-next-line:max-line-length
+              description: 'Mua ' + this.product.name + ' ở hệ thống Shop App Online sẽ được bảo hành chính hãng và chúng tôi sẽ đảm bảo chất lượng sản phẩm cho bạn',
+              image: this.product.productImageUrls,
+              slug: strSlug
+            });
             if (sessionStorage.getItem('currentUser') == null) {
               return;
             }
