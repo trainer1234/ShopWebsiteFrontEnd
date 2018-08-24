@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   title = 'app';
   name = '@ngx-share/buttons';
   constructor(private router: Router) {
-
   }
 
   ngOnInit() {

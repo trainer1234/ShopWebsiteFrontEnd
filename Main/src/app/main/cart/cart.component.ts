@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import {Component, OnInit, Inject} from '@angular/core';
 import {OrderService} from '../../shared/services/order.service';
 import {Customer} from '../../shared/models/customer';
 import {EmitterService} from '../../shared/services/emitter.service';
@@ -19,7 +20,7 @@ export class CartComponent implements OnInit {
   paymentMethod = 0;
   showLoadingIndicator = false;
 
-  constructor(private orderService: OrderService) {
+  constructor(@Inject(WINDOW) private window: Window, private orderService: OrderService) {
     this.cartItems = JSON.parse(sessionStorage.getItem('cart'));
   }
 
@@ -85,7 +86,7 @@ export class CartComponent implements OnInit {
         }
         else {
           const redirectUrl = data['content'].paypal_redirect;
-          window.location.href = redirectUrl;
+          this.window.location.href = redirectUrl;
         }
       },
       err => {

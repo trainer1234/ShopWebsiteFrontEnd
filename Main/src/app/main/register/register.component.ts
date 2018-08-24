@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit , Inject} from '@angular/core';
 import {Manufacture} from '../../shared/models/manufacture';
 import {ManufactureService} from '../../shared/services/manufacture.service';
 import {AccountService} from '../../shared/services/account.service';
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   public selectHobbiesMark: boolean[] = [];
   public manufactures: Manufacture[] = [];  
 
-  constructor(public manufactureService: ManufactureService, private accountService: AccountService,
+  constructor(@Inject(WINDOW) private window: Window, public manufactureService: ManufactureService, private accountService: AccountService,
     private authService: AuthService, private router: Router) {
 
    }
@@ -63,7 +64,7 @@ export class RegisterComponent implements OnInit {
             sessionStorage.setItem('currentUser', this.userName);
             sessionStorage.setItem('accessToken', loginData['accessToken']);
             sessionStorage.setItem('role', loginData['role']);
-            window.location.reload();
+            this.window.location.reload();
             this.router.navigate(['/']);
           },
           loginErr => {
