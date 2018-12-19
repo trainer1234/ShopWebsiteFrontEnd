@@ -5,6 +5,7 @@ import {AuthService} from '../shared/services/auth.service';
 import {Property} from '../shared/models/property';
 import {Account} from '../shared/models/account';
 import {AccountService} from '../shared/services/account.service';
+import {RegisterDto} from "../shared/models/register-dto";
 
 @Component({
   selector: 'app-account-manager',
@@ -96,6 +97,7 @@ export class AccountManagerComponent implements OnInit {
         this.selectedAccount.role.name = 'Khách hàng';
         break;
     }
+
     if (this.isAddNewAccount) {
       this.finishAddNew(item);
     } else {
@@ -104,7 +106,15 @@ export class AccountManagerComponent implements OnInit {
   }
 
   finishAddNew(item: Account) {
-    this.accountService.addAccount(this.selectedAccount).subscribe(
+    let registerDto = new RegisterDto();
+
+    registerDto.userName = item.userName;
+    registerDto.isAddNew = item.isAddNew;
+    registerDto.isModify = item.isModify;
+    registerDto.password = item.password;
+    registerDto.role = item.role.id;
+
+    this.accountService.addAccount(registerDto).subscribe(
       data => {
         item.isAddNew = false;
         this.isAddNewAccount = false;
@@ -123,7 +133,15 @@ export class AccountManagerComponent implements OnInit {
   }
 
   finishEdit(item: Account) {
-    this.accountService.editAccount(item).subscribe(
+    let registerDto = new RegisterDto();
+
+    registerDto.userName = item.userName;
+    registerDto.isAddNew = item.isAddNew;
+    registerDto.isModify = item.isModify;
+    registerDto.password = item.password;
+    registerDto.role = item.role.id;
+
+    this.accountService.editAccount(registerDto).subscribe(
       data => {
         item.isModify = false;
         this.isModifyAccount = false;
